@@ -5,6 +5,41 @@
 > [!IMPORTANT]
 > 收录不代表官方背书、安全审计或运行兼容。安装第三方插件前，请检查上游源码、权限、依赖和许可证。
 
+## 插件网站
+
+访问地址：[dsh-plugins.org](https://dsh-plugins.org)
+
+仓库同时提供部署在 Cloudflare Worker 上的插件集合网站，支持：
+
+* 按仓库名、包名、介绍、语言和许可证搜索
+* 按语言与许可证筛选
+* 按星标、更新时间或名称排序
+* 一键复制固定提交版本的安装命令
+* 从 GitHub 主分支读取最新目录，读取失败时回退到部署内目录
+
+本地运行：
+
+```bash
+npm install
+npm run dev
+```
+
+质量检查与构建：
+
+```bash
+npm run check
+npm test
+npm run build
+npx wrangler deploy --dry-run
+```
+
+确认 Wrangler 已登录后部署：
+
+```bash
+npx wrangler whoami
+npm run deploy
+```
+
 ## 插件目录
 
 更新时间：2026-08-13T17:01:05.467Z

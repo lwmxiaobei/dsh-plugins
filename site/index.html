@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="发现、搜索并安装 DeepSeek Harness 社区插件。">
+    <meta name="theme-color" content="#f5f3ec">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/styles.css">
+    <title>DSH Plugins｜DeepSeek Harness 插件目录</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#plugin-results">跳到插件列表</a>
+
+    <header class="hero">
+      <nav class="nav shell" aria-label="主导航">
+        <a class="brand" href="/" aria-label="DSH Plugins 首页">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M7 27c4 0 6-2 7-6 3 7 9 11 18 11 4 0 7-2 9-4-2 8-9 13-18 13C13 41 7 35 7 27Z"/>
+            <path d="M35 18c4 0 7-3 7-7 3 5 2 10-2 13M17 27c3 2 7 3 11 3"/>
+          </svg>
+          <span>DSH Plugins</span>
+        </a>
+        <a class="nav-link" href="https://github.com/lwmxiaobei/dsh-plugins" target="_blank" rel="noreferrer">
+          <span>GitHub</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M8 6h6v6"/></svg>
+        </a>
+      </nav>
+
+      <div class="hero-body shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span>DeepSeek Harness 社区目录</p>
+          <h1>找到下一个<br><em>顺手的插件</em></h1>
+          <p class="hero-lead">搜索社区插件，查看上游信息，复制固定版本的安装命令。</p>
+          <a class="hero-action" href="#directory-title">
+            <span>浏览插件目录</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+          </a>
+        </div>
+
+        <div class="whale-scene" aria-hidden="true">
+          <svg class="whale" viewBox="0 0 620 420">
+            <path class="whale-body" d="M91 228c41-92 138-138 254-116 53 10 91 39 121 79 22 29 60 38 101 23-12 29-35 48-69 57 20 16 42 22 67 19-33 35-81 42-123 19-45 42-111 62-190 52-105-13-178-62-161-133Z"/>
+            <path class="whale-belly" d="M94 244c88 81 261 96 346 25"/>
+            <path class="whale-fin" d="M294 338c30 29 64 44 101 46-23-29-34-57-34-84"/>
+            <path class="whale-tail" d="M91 228c-28 0-51-14-66-42 27-4 49 3 66 20 3-27 18-48 44-62 8 34-3 62-32 84"/>
+            <circle class="whale-eye" cx="393" cy="184" r="6"/>
+            <path class="whale-smile" d="M411 211c15 9 31 9 47 1"/>
+            <path class="whale-spray" d="M423 122c0-29 12-51 37-67M432 124c21-19 47-24 76-15M416 120c-14-25-34-41-60-48"/>
+            <g class="bubbles">
+              <circle cx="510" cy="92" r="5"/><circle cx="542" cy="151" r="9"/><circle cx="563" cy="73" r="3"/>
+            </g>
+          </svg>
+          <span class="orbit orbit-one"></span>
+          <span class="orbit orbit-two"></span>
+          <span class="spark spark-one">✦</span>
+          <span class="spark spark-two">✦</span>
+        </div>
+      </div>
+
+      <dl class="catalog-stats shell" aria-label="目录概况">
+        <div class="stat">
+          <dt>已收录</dt>
+          <dd><strong id="plugin-total">···</strong> 个插件</dd>
+        </div>
+        <div class="stat">
+          <dt>目录更新</dt>
+          <dd id="catalog-updated">加载中</dd>
+        </div>
+        <div class="stat stat-note">
+          <dt>同步频率</dt>
+          <dd>每 15 分钟获取最新目录</dd>
+        </div>
+      </dl>
+    </header>
+
+    <main class="main shell">
+      <section class="directory" aria-labelledby="directory-title">
+        <div class="section-heading">
+          <p class="section-index">01 / Plugin index</p>
+          <h2 id="directory-title">插件目录</h2>
+          <p>从真实社区仓库中发现工具。每条安装命令都固定到目录校验时的提交版本。</p>
+        </div>
+
+        <form class="search" id="search-form" role="search">
+          <label class="sr-only" for="search-input">搜索插件</label>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+            <input
+              id="search-input"
+              name="q"
+              type="search"
+              autocomplete="off"
+              placeholder="搜索名称、介绍、包名…"
+            >
+            <kbd aria-label="快捷键斜杠">/</kbd>
+          </div>
+        </form>
+
+        <div class="toolbar" aria-label="筛选和排序">
+          <div class="select-control">
+            <label for="language-filter">语言</label>
+            <select id="language-filter" name="language">
+              <option value="all">全部语言</option>
+            </select>
+          </div>
+
+          <div class="select-control">
+            <label for="license-filter">许可证</label>
+            <select id="license-filter" name="license">
+              <option value="all">全部许可证</option>
+            </select>
+          </div>
+
+          <div class="select-control">
+            <label for="sort-select">排序</label>
+            <select id="sort-select" name="sort">
+              <option value="stars">最多星标</option>
+              <option value="updated">最近更新</option>
+              <option value="name">名称</option>
+            </select>
+          </div>
+
+          <button class="text-button" id="reset-filters" type="button" hidden>清除筛选</button>
+        </div>
+
+        <div class="result-meta">
+          <p id="result-summary" role="status" aria-live="polite">正在读取插件目录…</p>
+          <p>安装前请检查上游源码、权限和许可证。</p>
+        </div>
+
+        <ol class="plugin-grid" id="plugin-results" aria-busy="true"></ol>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">⌕</span>
+          <p>没有找到匹配的插件</p>
+          <p>试试更短的关键词，或清除语言与许可证筛选。</p>
+          <button class="primary-button" type="button" data-reset>查看全部插件</button>
+        </div>
+
+        <button class="load-more" id="load-more" type="button" hidden>显示更多</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <p>社区维护，不代表官方背书或安全审计。</p>
+        <p><a href="https://github.com/lwmxiaobei/dsh-plugins" target="_blank" rel="noreferrer">查看目录源码 <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </footer>
+
+    <div class="toast" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <template id="plugin-card-template">
+      <li>
+        <article class="plugin-card">
+          <header class="plugin-header">
+            <div class="plugin-title">
+              <p class="plugin-owner" data-owner></p>
+              <h3><a data-repository target="_blank" rel="noreferrer"></a></h3>
+            </div>
+            <p class="plugin-stars"><span aria-hidden="true">★</span> <span data-stars></span></p>
+          </header>
+
+          <p class="plugin-description" data-description></p>
+
+          <ul class="plugin-meta" aria-label="插件信息">
+            <li data-language-item><span data-language></span></li>
+            <li data-license></li>
+            <li data-version-item>v<span data-version></span></li>
+          </ul>
+
+          <div class="install-command">
+            <code data-command></code>
+            <button class="copy-button" type="button" data-copy>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="6" width="10" height="10" rx="1"/><path d="M4 13H3V3h10v1"/></svg>
+              <span>复制命令</span>
+            </button>
+          </div>
+        </article>
+      </li>
+    </template>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
