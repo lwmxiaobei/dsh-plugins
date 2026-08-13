@@ -7,16 +7,16 @@
 
 ## 插件目录
 
-更新时间：2026-08-13T16:57:54.212Z
+更新时间：2026-08-13T16:59:20.317Z
 
-当前收录 252 个通过基础 bundle 清单校验的插件。插件地址和介绍均来自对应的上游仓库。
+当前收录 253 个通过基础 bundle 清单校验的插件。插件地址和介绍均来自对应的上游仓库。
 
 | 插件 | 介绍 | 包名 | 许可证 | 星标 |
 | :--- | :--- | :--- | :---: | ---: |
-| [liustack/modlens](https://github.com/liustack/modlens) | The first vision plugin for DeepSeek Harness, and the vision bridge for every text-only coding agent. Paste an image, get structured JSON evidence (OCR, layout, semantics). | `@liustack/modlens` | MIT | 668 |
+| [liustack/modlens](https://github.com/liustack/modlens) | The first vision plugin for DeepSeek Harness, and the vision bridge for every text-only coding agent. Paste an image, get structured JSON evidence (OCR, layout, semantics). | `@liustack/modlens` | MIT | 669 |
 | [ccch1mneyyy/dsh-cc-tui](https://github.com/ccch1mneyyy/dsh-cc-tui) | DSH 官方尚无终端 TUI 的补位之作：Claude Code 风格全屏交互终端插件——像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 回滚、上下文进度条 + TPS 仪表。npm 一键安装。 | `dsh-cc-tui` | BSD-3-Clause | 159 |
 | [Anionex/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) | 让纯文本模型更好地做视觉任务的DeepSeek Harness插件：带意图的图片问答、长截图 OCR、UI 还原等｜DeepSeek Harness-native integration for agent-vision-toolkit: image Q&A, long-screenshot OCR, UI restoration, grounding, pixel diff, Artifacts, and Web UI. | `@dsh-external/dsh-vision-toolkit` | MIT | 131 |
-| [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | 一个侧边栏的完整工作台，支持三方拓展注册新Tab页面，内置文件渲染编辑/终端/Git/子代理 | `dsh-better-sidebar` | MIT | 96 |
+| [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | 一个侧边栏的完整工作台，支持三方拓展注册新Tab页面，内置文件渲染编辑/终端/Git/子代理 | `dsh-better-sidebar` | MIT | 97 |
 | [Nagi-ovo/dsh-ads](https://github.com/Nagi-ovo/dsh-ads) | 是兄弟就来蹬我！DSH Web UI 广告：2005 年中文站点风格的侧栏广告 / 对话内信息流 / 角落弹窗 + 一个真实热区比视觉小得多的关闭叉。素材全虚构，域名打码。 | `@dsh-external/dsh-ads` | NOASSERTION | 87 |
 | [huiliyi37/dsh-tianshu-tui](https://github.com/huiliyi37/dsh-tianshu-tui) | dsh-tianshu-tui — DeepSeek Harness terminal UI | `@huiliyi37/dsh-tianshu-tui` | Apache-2.0 | 70 |
 | [NanmiCoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | AgentTeams plugin for DeepSeek Harness | `dsh-agent-teams` | NOASSERTION | 54 |
@@ -262,6 +262,7 @@
 | [1475505/dsh-plugin-miliastra-toolbox](https://github.com/1475505/dsh-plugin-miliastra-toolbox) | 将千星沙箱（原神千星奇域）知识库接入 Deepseek Harness 的插件 | `dsh-plugin-miliastra-toolbox` | NOASSERTION | 0 |
 | [Dino6021/dsh-usage-cost](https://github.com/Dino6021/dsh-usage-cost) | DSH plugin: per-step timestamped DeepSeek API usage timeline + peak/off-peak cost readout. Official bundle; install via: dsh plugin --profile web add github:Dino6021/dsh-usage-cost#main | `dsh-usage-cost` | MIT | 0 |
 | [DTSFO/dsh-model-modes](https://github.com/DTSFO/dsh-model-modes) | Capability-aware reasoning controls and Fast model routing for DeepSeek Harness | `dsh-model-modes` | MIT | 0 |
+| [hccccc01333/dsh-report-html](https://github.com/hccccc01333/dsh-report-html) | Generate self-contained interactive HTML reports from Markdown, tables, charts, China province maps, flowcharts, math, and drill-down tables — a DeepSeek Harness (dsh) plugin | `dsh-report-html` | NOASSERTION | 0 |
 | [Jesse-njx/dsh-chatnode-wechat](https://github.com/Jesse-njx/dsh-chatnode-wechat) | Chat with, monitor, and approve your DSH agents from WeChat — an iLink gateway + conversation node bundle for DeepSeek Harness | `@dsh-cowork/chatnode-wechat` | MIT | 0 |
 | [Jesse-njx/dsh-routines](https://github.com/Jesse-njx/dsh-routines) | dsh-routines — scheduled agents for DSH: run a prompt on a cron, get the digest where you already are (file digests, chatnode delivery, unattended-safe) | `@dsh-routines/bundle` | MIT | 0 |
 | [mitao-su/dsh-playwright-cli](https://github.com/mitao-su/dsh-playwright-cli) | DeepSeek Harness (DSH) host plugin wrapping the Playwright CLI: install browsers, run tests, open the HTML report from the agent loop. | `dsh-playwright-cli` | MIT | 0 |
