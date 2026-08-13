@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "topic": "dsh-plugin",
-  "generatedAt": "2026-08-13T16:59:20.317Z",
-  "count": 253,
+  "generatedAt": "2026-08-13T17:01:05.467Z",
+  "count": 254,
   "plugins": [
     {
       "repository": "liustack/modlens",
@@ -17,7 +17,7 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:57:24Z",
+      "updatedAt": "2026-08-13T16:59:03Z",
       "pushedAt": "2026-08-13T16:58:21Z",
       "classification": "plugin",
       "reason": null,
@@ -71,13 +71,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "MIT",
-      "stars": 131,
+      "stars": 133,
       "forks": 2,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:48:22Z",
+      "updatedAt": "2026-08-13T16:59:57Z",
       "pushedAt": "2026-08-13T15:18:28Z",
       "classification": "plugin",
       "reason": null,
@@ -101,14 +101,14 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "MIT",
-      "stars": 97,
+      "stars": 98,
       "forks": 2,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:57:21Z",
-      "pushedAt": "2026-08-13T16:21:03Z",
+      "updatedAt": "2026-08-13T16:59:22Z",
+      "pushedAt": "2026-08-13T16:59:36Z",
       "classification": "plugin",
       "reason": null,
       "commit": "3d88752eb184d7d8b535d66a296fade474dd053f",
@@ -131,13 +131,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "NOASSERTION",
-      "stars": 87,
+      "stars": 88,
       "forks": 0,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:51:18Z",
+      "updatedAt": "2026-08-13T16:59:55Z",
       "pushedAt": "2026-08-13T14:29:38Z",
       "classification": "plugin",
       "reason": null,
@@ -6858,10 +6858,10 @@
       "fork": false,
       "template": false,
       "updatedAt": "2026-08-13T16:50:07Z",
-      "pushedAt": "2026-08-13T16:55:25Z",
+      "pushedAt": "2026-08-13T17:00:43Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "101608fd2f2ff6a4167a44945a9d7321164b39af",
+      "commit": "5cf03f1d2ba969dbaa2b25dd6e71f6fa77e0cda8",
       "package": {
         "name": "dsh-balance",
         "version": "0.1.6",
@@ -6870,8 +6870,8 @@
         "clientPlatform": "web"
       },
       "install": {
-        "spec": "github:TwotwoPiggy/dsh-balance#101608fd2f2ff6a4167a44945a9d7321164b39af",
-        "command": "dsh plugin --profile web add github:TwotwoPiggy/dsh-balance#101608fd2f2ff6a4167a44945a9d7321164b39af"
+        "spec": "github:TwotwoPiggy/dsh-balance#5cf03f1d2ba969dbaa2b25dd6e71f6fa77e0cda8",
+        "command": "dsh plugin --profile web add github:TwotwoPiggy/dsh-balance#5cf03f1d2ba969dbaa2b25dd6e71f6fa77e0cda8"
       }
     },
     {
@@ -7509,7 +7509,7 @@
       "url": "https://github.com/Jesse-njx/dsh-chatnode-wechat",
       "description": "Chat with, monitor, and approve your DSH agents from WeChat — an iLink gateway + conversation node bundle for DeepSeek Harness",
       "defaultBranch": "main",
-      "language": null,
+      "language": "TypeScript",
       "license": "MIT",
       "stars": 0,
       "forks": 0,
@@ -7517,7 +7517,7 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:49:47Z",
+      "updatedAt": "2026-08-13T17:00:15Z",
       "pushedAt": "2026-08-13T16:55:50Z",
       "classification": "plugin",
       "reason": null,
@@ -7535,6 +7535,36 @@
       }
     },
     {
+      "repository": "Jesse-njx/dsh-crosstalk",
+      "url": "https://github.com/Jesse-njx/dsh-crosstalk",
+      "description": "Cross-session messaging for DSH — any session on the machine can list and message any other, Claude Code-style",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "stars": 0,
+      "forks": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "template": false,
+      "updatedAt": "2026-08-13T17:00:10Z",
+      "pushedAt": "2026-08-13T17:00:00Z",
+      "classification": "plugin",
+      "reason": null,
+      "commit": "e14c32668b01f3e059f92cc3dbd35fee7565575c",
+      "package": {
+        "name": "@dsh-crosstalk/bundle",
+        "version": "0.1.0",
+        "private": false,
+        "bundlePatch": "cordis.patch.yml",
+        "clientPlatform": null
+      },
+      "install": {
+        "spec": "github:Jesse-njx/dsh-crosstalk#e14c32668b01f3e059f92cc3dbd35fee7565575c",
+        "command": "dsh plugin --profile web add github:Jesse-njx/dsh-crosstalk#e14c32668b01f3e059f92cc3dbd35fee7565575c"
+      }
+    },
+    {
       "repository": "Jesse-njx/dsh-routines",
       "url": "https://github.com/Jesse-njx/dsh-routines",
       "description": "dsh-routines — scheduled agents for DSH: run a prompt on a cron, get the digest where you already are (file digests, chatnode delivery, unattended-safe)",
@@ -7547,11 +7577,11 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T16:56:53Z",
-      "pushedAt": "2026-08-13T16:56:26Z",
+      "updatedAt": "2026-08-13T17:00:25Z",
+      "pushedAt": "2026-08-13T16:59:52Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "5af664c692f506bf4c22a15cfbbdbf5b2cc1dbd5",
+      "commit": "f59b4f03e7b36648b804fd07e57a53e276da5d81",
       "package": {
         "name": "@dsh-routines/bundle",
         "version": "0.1.0",
@@ -7560,8 +7590,8 @@
         "clientPlatform": null
       },
       "install": {
-        "spec": "github:Jesse-njx/dsh-routines#5af664c692f506bf4c22a15cfbbdbf5b2cc1dbd5",
-        "command": "dsh plugin --profile web add github:Jesse-njx/dsh-routines#5af664c692f506bf4c22a15cfbbdbf5b2cc1dbd5"
+        "spec": "github:Jesse-njx/dsh-routines#f59b4f03e7b36648b804fd07e57a53e276da5d81",
+        "command": "dsh plugin --profile web add github:Jesse-njx/dsh-routines#f59b4f03e7b36648b804fd07e57a53e276da5d81"
       }
     },
     {
