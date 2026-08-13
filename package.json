@@ -2,7 +2,7 @@
   "name": "dsh-plugins",
   "version": "1.0.0",
   "private": true,
-  "description": "经过清单校验并固定版本的 DeepSeek Harness 插件集合",
+  "description": "DeepSeek Harness 插件导航与介绍目录",
   "type": "module",
   "scripts": {
     "check": "node scripts/check.mjs",

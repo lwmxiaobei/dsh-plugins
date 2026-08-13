@@ -28,13 +28,20 @@ async function githubFetch(path, { optional = false, raw = false } = {}) {
   }
   if (token) headers.Authorization = `Bearer ${token}`
 
-  const response = await fetch(`${apiBase}${path}`, { headers })
-  if (optional && response.status === 404) return null
-  if (!response.ok) {
-    const body = await response.text()
-    throw new Error(`GitHub API ${response.status}: ${path}\n${body}`)
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    try {
+      const response = await fetch(`${apiBase}${path}`, { headers })
+      if (optional && response.status === 404) return null
+      if (!response.ok) {
+        const body = await response.text()
+        throw new Error(`GitHub API ${response.status}: ${path}\n${body}`)
+      }
+      return raw ? response.text() : response.json()
+    } catch (error) {
+      if (attempt === 4) throw error
+      await new Promise((resolve) => setTimeout(resolve, attempt * 500))
+    }
   }
-  return raw ? response.text() : response.json()
 }
 
 async function searchRepositories() {
@@ -144,7 +151,6 @@ async function inspectRepository(repository) {
     classification: 'plugin',
     reason: null,
     commit,
-    path: `plugins/${repository.full_name}`,
     package: {
       name: packageJson.name ?? repository.name,
       version: packageJson.version ?? null,
@@ -180,62 +186,64 @@ function markdownEscape(value) {
   return String(value ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ')
 }
 
-function generateCatalog(snapshot, plugins) {
+function generateReadme(snapshot, plugins) {
   const lines = [
-    '# DSH 插件目录',
+    '# Awesome DSH Plugins',
     '',
-    `同步时间：${snapshot}`,
+    '社区维护的 DeepSeek Harness 插件导航与介绍目录。',
     '',
-    `共收录 ${plugins.length} 个通过基础 bundle 清单校验的插件。星标数和许可证来自同步时的 GitHub API 快照。`,
+    '> [!IMPORTANT]',
+    '> 收录不代表官方背书、安全审计或运行兼容。安装第三方插件前，请检查上游源码、权限、依赖和许可证。',
     '',
-    '| 插件仓库 | 包名 | 描述 | 许可证 | 星标 | 固定提交 |',
-    '| --- | --- | --- | --- | ---: | --- |',
+    '## 插件目录',
+    '',
+    `更新时间：${snapshot}`,
+    '',
+    `当前收录 ${plugins.length} 个通过基础 bundle 清单校验的插件。插件地址和介绍均来自对应的上游仓库。`,
+    '',
+    '| 插件 | 介绍 | 包名 | 许可证 | 星标 |',
+    '| :--- | :--- | :--- | :---: | ---: |',
   ]
   for (const plugin of plugins) {
-    lines.push(`| [${markdownEscape(plugin.repository)}](${plugin.url}) | \`${markdownEscape(plugin.package.name)}\` | ${markdownEscape(plugin.description)} | ${markdownEscape(plugin.license)} | ${plugin.stars} | \`${plugin.commit.slice(0, 12)}\` |`)
+    const description = plugin.description || '上游仓库暂未提供介绍'
+    lines.push(`| [${markdownEscape(plugin.repository)}](${plugin.url}) | ${markdownEscape(description)} | \`${markdownEscape(plugin.package.name)}\` | ${markdownEscape(plugin.license)} | ${plugin.stars} |`)
   }
+  lines.push(
+    '',
+    '## 查找插件',
+    '',
+    '```bash',
+    'npm run list',
+    'node bin/dsh-plugins.mjs search vision',
+    'node bin/dsh-plugins.mjs info Anionex/dsh-vision-toolkit',
+    '```',
+    '',
+    '## 安装插件',
+    '',
+    '安装命令默认只预览，不执行上游代码：',
+    '',
+    '```bash',
+    'node bin/dsh-plugins.mjs install Anionex/dsh-vision-toolkit --profile web',
+    '```',
+    '',
+    '确认上游代码和许可证后，加入 `--execute` 执行安装。',
+    '',
+    '## 收录规则',
+    '',
+    '同步程序从 GitHub 的 `dsh-plugin` 主题发现候选仓库。只有根目录 `package.json` 声明 `dsh.bundle.patch`，对应 patch 文件真实存在，且仓库未归档、未禁用、不是模板的项目，才进入上面的目录。',
+    '',
+    '机器可读目录见 [catalog/plugins.json](catalog/plugins.json)。全部候选及未收录原因见 [catalog/repositories.json](catalog/repositories.json)。',
+    '',
+    '## 更新目录',
+    '',
+    '```bash',
+    'npm run sync',
+    'npm run check',
+    '```',
+    '',
+    '本仓库只保存导航数据、文档和维护脚本，不复制或嵌入任何第三方插件源码。插件版权与许可证归各上游项目所有。`NOASSERTION` 表示 GitHub API 未识别到明确许可证。',
+  )
   return `${lines.join('\n')}\n`
-}
-
-function generateGitmodules(plugins) {
-  const lines = []
-  for (const plugin of [...plugins].sort((a, b) => a.path.localeCompare(b.path))) {
-    lines.push(
-      `[submodule "${plugin.path}"]`,
-      `\tpath = ${plugin.path}`,
-      `\turl = ${plugin.url}.git`,
-      `\tbranch = ${plugin.defaultBranch}`,
-    )
-  }
-  return `${lines.join('\n')}\n`
-}
-
-function runGit(args, { allowFailure = false } = {}) {
-  const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' })
-  if (!allowFailure && result.status !== 0) {
-    throw new Error(`git ${args.join(' ')} 执行失败：\n${result.stderr}`)
-  }
-  return result
-}
-
-async function updateGitlinks(plugins) {
-  if (process.argv.includes('--no-gitlinks')) return
-  const inside = runGit(['rev-parse', '--is-inside-work-tree'], { allowFailure: true })
-  if (inside.status !== 0) return
-
-  const desired = new Map(plugins.map((plugin) => [plugin.path, plugin.commit]))
-  const current = runGit(['ls-files', '--stage', 'plugins'], { allowFailure: true })
-  const currentPaths = current.stdout
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => line.split('\t')[1])
-
-  for (const path of currentPaths) {
-    if (!desired.has(path)) runGit(['update-index', '--force-remove', '--', path])
-  }
-  for (const plugin of plugins) {
-    runGit(['update-index', '--add', '--cacheinfo', `160000,${plugin.commit},${plugin.path}`])
-  }
 }
 
 const repositories = await searchRepositories()
@@ -247,7 +255,6 @@ const plugins = inspected.filter((entry) => entry.classification === 'plugin').s
 const snapshot = new Date().toISOString()
 
 await mkdir(join(root, 'catalog'), { recursive: true })
-await mkdir(join(root, 'plugins'), { recursive: true })
 await writeFile(join(root, 'catalog', 'repositories.json'), `${JSON.stringify({
   schemaVersion: 1,
   topic,
@@ -262,12 +269,7 @@ await writeFile(join(root, 'catalog', 'plugins.json'), `${JSON.stringify({
   count: plugins.length,
   plugins,
 }, null, 2)}\n`)
-await writeFile(join(root, 'CATALOG.md'), generateCatalog(snapshot, plugins))
-await writeFile(join(root, '.gitmodules'), generateGitmodules(plugins))
-for (const plugin of plugins) {
-  await mkdir(join(root, plugin.path), { recursive: true })
-}
-await updateGitlinks(plugins)
+await writeFile(join(root, 'README.md'), generateReadme(snapshot, plugins))
 
 const counts = Object.groupBy(inspected, (entry) => entry.classification)
 console.log(`同步完成：${plugins.length} 个插件，${counts.related?.length ?? 0} 个相关项目，${counts['invalid-plugin']?.length ?? 0} 个清单无效项目，${counts['excluded-plugin']?.length ?? 0} 个排除项目。`)

@@ -62,7 +62,6 @@ function printInfo(plugin) {
 许可证：${plugin.license}
 语言：${plugin.language ?? '未知'}
 固定提交：${plugin.commit}
-源码目录：${plugin.path}
 上游地址：${plugin.url}
 安装规格：${plugin.install.spec}`)
 }
