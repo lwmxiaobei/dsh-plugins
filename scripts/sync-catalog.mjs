@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from 'node:child_process'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join, posix } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -186,6 +186,19 @@ function markdownEscape(value) {
   return String(value ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ')
 }
 
+async function readExistingCatalog(path) {
+  try {
+    return JSON.parse(await readFile(path, 'utf8'))
+  } catch (error) {
+    if (error?.code === 'ENOENT' || error instanceof SyntaxError) return null
+    throw error
+  }
+}
+
+function sameData(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right)
+}
+
 function generateReadme(snapshot, plugins) {
   const lines = [
     '# Awesome DSH Plugins',
@@ -234,6 +247,10 @@ function generateReadme(snapshot, plugins) {
     '',
     '机器可读目录见 [catalog/plugins.json](catalog/plugins.json)。全部候选及未收录原因见 [catalog/repositories.json](catalog/repositories.json)。',
     '',
+    '## 自动更新',
+    '',
+    'GitHub Actions 每天北京时间 09:17 自动发现和校验插件。目录内容发生变化时，工作流会自动提交到 `main`。也可以在 Actions 页面手动运行 `sync plugins`。',
+    '',
     '## 更新目录',
     '',
     '```bash',
@@ -252,17 +269,30 @@ console.log(`发现 ${repositories.length} 个带有 ${topic} 主题的仓库，
 const inspected = await mapConcurrent(repositories, concurrency, inspectRepository)
 inspected.sort(compareEntries)
 const plugins = inspected.filter((entry) => entry.classification === 'plugin').sort(compareEntries)
-const snapshot = new Date().toISOString()
 
 await mkdir(join(root, 'catalog'), { recursive: true })
-await writeFile(join(root, 'catalog', 'repositories.json'), `${JSON.stringify({
+const pluginsPath = join(root, 'catalog', 'plugins.json')
+const repositoriesPath = join(root, 'catalog', 'repositories.json')
+const previousPlugins = await readExistingCatalog(pluginsPath)
+const previousRepositories = await readExistingCatalog(repositoriesPath)
+const unchanged = previousPlugins?.topic === topic
+  && previousPlugins?.count === plugins.length
+  && sameData(previousPlugins?.plugins, plugins)
+  && previousRepositories?.topic === topic
+  && previousRepositories?.reportedCount === repositories.length
+  && sameData(previousRepositories?.repositories, inspected)
+const snapshot = unchanged && previousPlugins?.generatedAt === previousRepositories?.generatedAt
+  ? previousPlugins.generatedAt
+  : new Date().toISOString()
+
+await writeFile(repositoriesPath, `${JSON.stringify({
   schemaVersion: 1,
   topic,
   generatedAt: snapshot,
   reportedCount: repositories.length,
   repositories: inspected,
 }, null, 2)}\n`)
-await writeFile(join(root, 'catalog', 'plugins.json'), `${JSON.stringify({
+await writeFile(pluginsPath, `${JSON.stringify({
   schemaVersion: 1,
   topic,
   generatedAt: snapshot,

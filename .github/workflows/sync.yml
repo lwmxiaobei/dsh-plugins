@@ -1,0 +1,43 @@
+name: sync plugins
+
+on:
+  schedule:
+    # 每天北京时间 09:17 运行
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-plugins
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Discover and validate plugins
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run sync
+      - name: Check catalog
+        run: npm run check
+      - name: Commit updates
+        run: |
+          if git diff --quiet -- README.md catalog/plugins.json catalog/repositories.json; then
+            echo "插件目录没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md catalog/plugins.json catalog/repositories.json
+          git commit -m "自动更新插件目录"
+          git push origin HEAD:main

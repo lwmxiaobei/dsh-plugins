@@ -23,6 +23,7 @@ const readme = await readFile(join(root, 'README.md'), 'utf8')
 if (catalog.schemaVersion !== 1) fail('plugins.json 的 schemaVersion 不受支持')
 if (repositories.schemaVersion !== 1) fail('repositories.json 的 schemaVersion 不受支持')
 if (catalog.count !== catalog.plugins.length) fail('plugins.json 的 count 与实际数量不一致')
+if (catalog.generatedAt !== repositories.generatedAt) fail('两个目录的生成时间不一致')
 
 const repositoryNames = new Set()
 for (const plugin of catalog.plugins) {
