@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Discover {{PLUGIN_COUNT}} community plugins for DeepSeek Harness. Search by feature, language, and license, then copy a reproducible commit-pinned install command.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="theme-color" content="#173c58">
+    <meta name="color-scheme" content="light dark">
+    <meta name="author" content="DSH Plugins community">
+    <link rel="canonical" href="https://dsh-plugins.org/en">
+    <link rel="alternate" hreflang="zh-CN" href="https://dsh-plugins.org/">
+    <link rel="alternate" hreflang="en" href="https://dsh-plugins.org/en">
+    <link rel="alternate" hreflang="x-default" href="https://dsh-plugins.org/">
+    <link rel="alternate" type="application/rss+xml" title="Latest DSH Plugins" href="https://dsh-plugins.org/feed.xml">
+    <link rel="sitemap" type="application/xml" href="https://dsh-plugins.org/sitemap.xml">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/styles.css">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DSH Plugins">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:url" content="https://dsh-plugins.org/en">
+    <meta property="og:title" content="DeepSeek Harness Plugins and Install Guide">
+    <meta property="og:description" content="Search {{PLUGIN_COUNT}} DSH community plugins, inspect their details, and copy commit-pinned install commands.">
+    <meta property="og:image" content="https://dsh-plugins.org/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="DSH Plugins, a community directory for DeepSeek Harness plugins">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DeepSeek Harness Plugins and Install Guide">
+    <meta name="twitter:description" content="Search DSH community plugins and copy reproducible install commands.">
+    <meta name="twitter:image" content="https://dsh-plugins.org/og-image.png">
+    <title>DeepSeek Harness Plugins and Install Guide | DSH Plugins</title>
+    {{STRUCTURED_DATA}}
+  </head>
+  <body data-locale="en">
+    <a class="skip-link" href="#plugin-results">Skip to the plugin list</a>
+    <header class="hero">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="/en" aria-label="DSH Plugins home"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 27c4 0 6-2 7-6 3 7 9 11 18 11 4 0 7-2 9-4-2 8-9 13-18 13C13 41 7 35 7 27Z"/><path d="M35 18c4 0 7-3 7-7 3 5 2 10-2 13M17 27c3 2 7 3 11 3"/></svg><span>DSH Plugins</span></a>
+        <div class="nav-actions"><a class="nav-link" href="#install-guide">Install guide</a><a class="nav-link" href="/en/about">About</a><a class="nav-link language-link" href="/" lang="zh-CN" hreflang="zh-CN">中文</a><a class="nav-link" href="https://github.com/lwmxiaobei/dsh-plugins" target="_blank" rel="noopener noreferrer"><span>GitHub</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M8 6h6v6"/></svg></a></div>
+      </nav>
+      <div class="hero-body shell">
+        <div class="hero-copy"><p class="eyebrow"><span></span>Community plugin directory</p><h1>Explore <em>DSH plugins</em></h1><p class="hero-lead">Discover, search, and install DeepSeek Harness community plugins. Compare real upstream repositories, versions, licenses, and commit-pinned commands for agent tools, Web UI extensions, and developer workflows.</p><a class="hero-action" href="#directory-title"><span>Browse the directory</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a></div>
+        <div class="whale-scene" aria-hidden="true"><svg class="whale" viewBox="0 0 620 420"><path class="whale-body" d="M91 228c41-92 138-138 254-116 53 10 91 39 121 79 22 29 60 38 101 23-12 29-35 48-69 57 20 16 42 22 67 19-33 35-81 42-123 19-45 42-111 62-190 52-105-13-178-62-161-133Z"/><path class="whale-belly" d="M94 244c88 81 261 96 346 25"/><path class="whale-fin" d="M294 338c30 29 64 44 101 46-23-29-34-57-34-84"/><path class="whale-tail" d="M91 228c-28 0-51-14-66-42 27-4 49 3 66 20 3-27 18-48 44-62 8 34-3 62-32 84"/><circle class="whale-eye" cx="393" cy="184" r="6"/><path class="whale-smile" d="M411 211c15 9 31 9 47 1"/><path class="whale-spray" d="M423 122c0-29 12-51 37-67M432 124c21-19 47-24 76-15M416 120c-14-25-34-41-60-48"/><g class="bubbles"><circle cx="510" cy="92" r="5"/><circle cx="542" cy="151" r="9"/><circle cx="563" cy="73" r="3"/></g></svg><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="spark spark-one">✦</span><span class="spark spark-two">✦</span></div>
+      </div>
+      <dl class="catalog-stats shell"><div class="stat"><dt>Indexed</dt><dd><strong id="plugin-total">{{PLUGIN_COUNT}}</strong> plugins</dd></div><div class="stat"><dt>Catalog updated</dt><dd id="catalog-updated">{{CATALOG_UPDATED_EN}}</dd></div><div class="stat stat-note"><dt>Refresh cycle</dt><dd>Latest catalog every 15 minutes</dd></div></dl>
+    </header>
+
+    <main class="main shell">
+      <section class="directory" aria-labelledby="directory-title">
+        <div class="section-heading"><p class="section-index">01 / Plugin index</p><h2 id="directory-title">DeepSeek Harness plugin directory</h2><p>Discover tools from real community repositories. Filter by keyword, language, and license. Every command points to the commit checked by this catalog.</p></div>
+        <form class="search" id="search-form" role="search"><label class="sr-only" for="search-input">Search DeepSeek Harness plugins</label><div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><input id="search-input" name="q" type="search" autocomplete="off" placeholder="Search name, feature, package…"><kbd title="Shortcut: slash">/</kbd></div><button class="sr-only" type="submit">Search plugins</button></form>
+        <div class="toolbar" role="group" aria-label="Filters and sorting"><div class="select-control"><label for="language-filter">Language</label><select id="language-filter" name="language"><option value="all">All languages</option></select></div><div class="select-control"><label for="license-filter">License</label><select id="license-filter" name="license"><option value="all">All licenses</option></select></div><div class="select-control"><label for="sort-select">Sort</label><select id="sort-select" name="sort"><option value="stars">Most stars</option><option value="updated">Recently updated</option><option value="name">Name</option></select></div><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button></div>
+        <div class="result-meta"><p id="result-summary" role="status" aria-live="polite">{{PLUGIN_COUNT}} plugins</p><p>Review upstream source, permissions, and license before installing.</p></div>
+        <ol class="plugin-grid" id="plugin-results" aria-busy="false">{{PLUGIN_CARDS_EN}}</ol>
+        <div class="empty-state" id="empty-state" hidden><span aria-hidden="true">⌕</span><p>No matching plugins</p><p>Try a shorter term or clear the language and license filters.</p><button class="primary-button" type="button" data-reset>View all plugins</button></div>
+        <button class="load-more" id="load-more" type="button">Show 24 more</button>
+      </section>
+
+      <section class="editorial-section" id="install-guide" aria-labelledby="guide-title"><div class="section-heading compact-heading"><p class="section-index">02 / Install guide</p><h2 id="guide-title">How to install DSH plugins</h2><p>The directory provides commands pinned to a specific Git commit for reproducibility. Always review the upstream documentation and requested permissions first.</p></div><ol class="step-grid"><li><span>01</span><h3>Find a plugin</h3><p>Search by name, capability, package, or owner. Use language and license filters to narrow the directory.</p></li><li><span>02</span><h3>Review its details</h3><p>Open the detail page to inspect the repository, version, license, last update, and pinned commit hash.</p></li><li><span>03</span><h3>Copy and run</h3><p>Copy the install command and run it in the environment hosting DeepSeek Harness. Follow upstream instructions for configuration.</p></li></ol></section>
+
+      <section class="editorial-section method-section" aria-labelledby="method-title"><div><p class="section-index">03 / Directory policy</p><h2 id="method-title">How the catalog is maintained</h2></div><div class="prose"><p>DSH Plugins discovers candidate repositories through the GitHub <code>dsh-plugin</code> topic, then checks their plugin manifest, package metadata, and install requirements. Public data is refreshed regularly and every detail page states when its snapshot was updated.</p><p>Inclusion is not a security audit or official endorsement. We preserve direct links to upstream source, never fabricate ratings, and do not present an unknown license as permission to reuse. Corrections are welcome through GitHub.</p></div></section>
+
+      <section class="editorial-section faq-section" aria-labelledby="faq-title"><div class="section-heading compact-heading"><p class="section-index">04 / FAQ</p><h2 id="faq-title">Frequently asked questions</h2><p>Answers about plugin discovery, install commands, and catalog data.</p></div><div class="faq-list"><details><summary>What is a DeepSeek Harness plugin?</summary><p>It is an extension installed into DeepSeek Harness to add tools, user interfaces, model integrations, memory, browser automation, or other capabilities. Each plugin is maintained by its upstream repository.</p></details><details><summary>Why does the install command include a commit hash?</summary><p>A pinned commit prevents a moving upstream branch from returning different code for the same command. It makes the catalog snapshot and installed source easier to verify and reproduce.</p></details><details><summary>Are listed plugins security audited?</summary><p>No. The directory validates public metadata and basic plugin structure, not the complete code, security, or privacy behavior. Review source, permissions, and license before installing.</p></details><details><summary>How do I submit or update a plugin?</summary><p>Add the <code>dsh-plugin</code> topic to a public GitHub repository and keep its plugin manifest complete. The next catalog sync can discover and validate it, or you can open an issue in the directory repository.</p></details></div></section>
+    </main>
+
+    <footer class="footer"><div class="shell footer-inner"><p>Community maintained. No official endorsement or security audit.</p><nav class="footer-links" aria-label="Footer navigation"><a href="/en/about">About</a><a href="/en/privacy">Privacy</a><a href="/" lang="zh-CN" hreflang="zh-CN">中文</a><a href="https://github.com/lwmxiaobei/dsh-plugins" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a></nav></div></footer>
+    <div class="toast" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></div>
+    <template id="plugin-card-template"><li><article class="plugin-card"><header class="plugin-header"><div class="plugin-title"><p class="plugin-owner" data-owner></p><h3><a data-repository><span class="sr-only">Plugin name</span></a></h3></div><p class="plugin-stars"><span aria-hidden="true">★</span> <span data-stars></span></p></header><p class="plugin-description" data-description></p><ul class="plugin-meta"><li data-language-item><span data-language></span></li><li data-license></li><li data-version-item>v<span data-version></span></li></ul><div class="install-command"><code data-command></code><button class="copy-button" type="button" data-copy><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="6" width="10" height="10" rx="1"/><path d="M4 13H3V3h10v1"/></svg><span>Copy command</span></button></div></article></li></template>
+    <script type="application/json" id="detail-repositories">{{DETAIL_REPOSITORIES}}</script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

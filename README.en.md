@@ -11,31 +11,39 @@ A community maintained directory of DeepSeek Harness plugins, with links and des
 
 Visit [dsh-plugins.org](https://dsh-plugins.org).
 
-This repository also provides a plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, and copying installation commands pinned to exact commits. The website reads the latest catalog from the GitHub main branch and falls back to its bundled catalog when that request fails.
+This repository also provides a bilingual plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, installation commands pinned to exact commits, and a static Chinese and English detail page for every plugin. The website includes canonical and alternate language links, Open Graph, Twitter Card, JSON-LD, an XML sitemap, robots.txt, RSS, a Web App Manifest, and llms.txt.
 
-Run and deploy locally:
+Run locally:
 
 ```bash
 npm install
 npm run dev
+```
+
+Check, build, and deploy:
+
+```bash
+npm run check
 npm test
 npm run build
 npx wrangler deploy --dry-run
 npm run deploy
 ```
 
+SEO entry points: [Chinese directory](https://dsh-plugins.org/) · [English directory](https://dsh-plugins.org/en) · [Sitemap](https://dsh-plugins.org/sitemap.xml) · [RSS](https://dsh-plugins.org/feed.xml) · [AI discovery guide](https://dsh-plugins.org/llms.txt)
+
 ## Plugin directory
 
-Last updated: 2026-08-14T00:32:29.938Z
+Last updated: 2026-08-14T00:40:24.876Z
 
-The directory currently contains 408 plugins that passed the basic bundle manifest checks. Links and descriptions come from their upstream repositories, so descriptions may remain in the language used by each author.
+The directory currently contains 410 plugins that passed the basic bundle manifest checks. Links and descriptions come from their upstream repositories, so descriptions may remain in the language used by each author.
 
 | Plugin | Description | Package | License | Stars |
 | :--- | :--- | :--- | :---: | ---: |
-| [liustack/modlens](https://github.com/liustack/modlens) | The first vision plugin for DeepSeek Harness, and the vision bridge for every text-only coding agent. Paste an image, get structured JSON evidence (OCR, layout, semantics). | `@liustack/modlens` | MIT | 718 |
-| [ccch1mneyyy/dsh-cc-tui](https://github.com/ccch1mneyyy/dsh-cc-tui) | 解决DSH 官方尚无终端 TUI 痛点的补位之作，献给偏爱cli的各位极客：Claude Code 风格全屏交互终端插件——像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 回滚、上下文进度条 + TPS 仪表。npm 一键安装。 | `dsh-cc-tui` | BSD-3-Clause | 222 |
-| [Anionex/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) | 让纯文本模型更好地做视觉任务的DeepSeek Harness插件：带意图的图片问答、长截图 OCR、UI 还原等｜DeepSeek Harness-native integration for agent-vision-toolkit: image Q&A, long-screenshot OCR, UI restoration, grounding, pixel diff, Artifacts, and Web UI. | `@dsh-external/dsh-vision-toolkit` | MIT | 162 |
-| [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | 一个侧边栏的完整工作台，支持三方拓展注册新Tab页面，内置文件渲染编辑/终端/Git/子代理 | `dsh-better-sidebar` | MIT | 134 |
+| [liustack/modlens](https://github.com/liustack/modlens) | The first vision plugin for DeepSeek Harness, and the vision bridge for every text-only coding agent. Paste an image, get structured JSON evidence (OCR, layout, semantics). | `@liustack/modlens` | MIT | 719 |
+| [ccch1mneyyy/dsh-cc-tui](https://github.com/ccch1mneyyy/dsh-cc-tui) | 解决DSH 官方尚无终端 TUI 痛点的补位之作，献给偏爱cli的各位极客：Claude Code 风格全屏交互终端插件——像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 回滚、上下文进度条 + TPS 仪表。npm 一键安装。 | `dsh-cc-tui` | BSD-3-Clause | 224 |
+| [Anionex/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) | 让纯文本模型更好地做视觉任务的DeepSeek Harness插件：带意图的图片问答、长截图 OCR、UI 还原等｜DeepSeek Harness-native integration for agent-vision-toolkit: image Q&A, long-screenshot OCR, UI restoration, grounding, pixel diff, Artifacts, and Web UI. | `@dsh-external/dsh-vision-toolkit` | MIT | 163 |
+| [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | 一个侧边栏的完整工作台，支持三方拓展注册新Tab页面，内置文件渲染编辑/终端/Git/子代理 | `dsh-better-sidebar` | MIT | 137 |
 | [Nagi-ovo/dsh-ads](https://github.com/Nagi-ovo/dsh-ads) | 是兄弟就来蹬我！DSH Web UI 广告：2005 年中文站点风格的侧栏广告 / 对话内信息流 / 角落弹窗 + 一个真实热区比视觉小得多的关闭叉。素材全虚构，域名打码。 | `@dsh-external/dsh-ads` | NOASSERTION | 118 |
 | [NanmiCoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | AgentTeams plugin for DeepSeek Harness | `dsh-agent-teams` | NOASSERTION | 83 |
 | [liustack/modsearch](https://github.com/liustack/modsearch) | The web plugin for DeepSeek Harness, and the search bridge for every text-only coding agent. Ask the web or X, get structured JSON evidence (search, fetch, citations). | `@liustack/modsearch` | MIT | 65 |
@@ -43,8 +51,8 @@ The directory currently contains 408 plugins that passed the basic bundle manife
 | [icetomoyo/dsh_workflow](https://github.com/icetomoyo/dsh_workflow) | 把Claude Code的UltraCode模式带给DSH，把 DSH 的一次性多 Agent 调度，升级为可生成、可保存、可治理、可观察、可恢复的 Workflow 层 | `@dsh-external/workflow` | MIT | 35 |
 | [Nagi-ovo/dsh-visualize](https://github.com/Nagi-ovo/dsh-visualize) | DSH 对话内生成式 UI 插件：模型把交互式 HTML 卡片直接画进会话流——visualize 工具 + 配套 skill + 沙箱渲染卡，带流式预览、组件浮入动画与鲸鱼蓝主题跟随 | `@dsh-external/dsh-visualize` | NOASSERTION | 33 |
 | [omdsh-dev/dsh-open-in-vscode](https://github.com/omdsh-dev/dsh-open-in-vscode) | Open DeepSeek Harness workspace directories in VS Code directly from the web GUI. | `dsh-open-in-vscode` | MIT | 33 |
+| [omdsh-dev/dsh-at-file](https://github.com/omdsh-dev/dsh-at-file) | Codex-style @file mentions for DeepSeek Harness: search workspace files in the composer and attach their contents to prompts. | `dsh-at-file` | MIT | 28 |
 | [vlln/whale-girl](https://github.com/vlln/whale-girl) | DSH Web GUI 桌面宠物插件（QQ 宠物形态）：右下角悬浮、可拖拽/投喂/玩耍的积累型伙伴。官方 repository-plugin（.dsh-plugin 格式），config.yaml 安装：github:dsh-external/whale-girl#<ref>&path:/.dsh-plugin | `whale-girl` | MIT | 28 |
-| [omdsh-dev/dsh-at-file](https://github.com/omdsh-dev/dsh-at-file) | Codex-style @file mentions for DeepSeek Harness: search workspace files in the composer and attach their contents to prompts. | `dsh-at-file` | MIT | 27 |
 | [omdsh-dev/dsh-notification](https://github.com/omdsh-dev/dsh-notification) | Desktop notifications for DeepSeek Harness turn completions, with per-outcome controls and include/exclude keyword rules. | `dsh-notification` | MIT | 25 |
 | [Anionex/dsh-turn-rewind](https://github.com/Anionex/dsh-turn-rewind) | deepseek harness对话和代码状态回退插件 \| DSH — rewind conversation and workspace state, powered by a persistent Change Ledger | `@dsh-external/turn-rewind` | BSD-3-Clause | 23 |
 | [alingalingling/ui-status-label](https://github.com/alingalingling/ui-status-label) | 把你鲸鱼娘思考时的 deep diving 自定义成任意你想要的样子 | `dsh-ui-status-label` | NOASSERTION | 21 |
@@ -366,6 +374,7 @@ The directory currently contains 408 plugins that passed the basic bundle manife
 | [agentic-control-plane/dsh-acp-plugin](https://github.com/agentic-control-plane/dsh-acp-plugin) | Agentic Control Plane for DeepSeek Harness — policy-check every tool call before it runs | `dsh-plugin-acp` | MIT | 0 |
 | [alison-xx/deepseek-harness-flow](https://github.com/alison-xx/deepseek-harness-flow) | Visual workflows and multi-model evaluation for DeepSeek Harness | `deepseek-harness-flow` | MIT | 0 |
 | [aryswisnu/dsh-eval-regression](https://github.com/aryswisnu/dsh-eval-regression) | No description provided by the upstream repository | `dsh-eval-regression` | MIT | 0 |
+| [BrambleXu/dsh-annotate](https://github.com/BrambleXu/dsh-annotate) | Visual browser element annotation for DeepSeek Harness, capturing DOM, styles, accessibility data, comments, and viewport screenshots. DeepSeek Harness 浏览器元素标注插件，捕获 DOM、样式、可访问性数据、评论和视口截图。 | `dsh-annotate` | MIT | 0 |
 | [cakeni/harness-whale](https://github.com/cakeni/harness-whale) | Unofficial community pet for DeepSeek Harness — a native DSH web plugin | `harness-whale` | MIT | 0 |
 | [Chi-hong22/dsh-mdbox](https://github.com/Chi-hong22/dsh-mdbox) | DeepSeek Harness (DSH) Web 输入框的 Markdown 编辑辅助插件。 | `@chi-hong22/dsh-mdbox` | MIT | 0 |
 | [csiroqa/dsh-archive-viewer](https://github.com/csiroqa/dsh-archive-viewer) | DeepSeek Harness（DSH）归档增强插件：自动定期归档、文件夹归档整理、LLM 摘要沉淀经验库、会话收藏与便签、会话删除与优雅关机。Archive enhancement plugin for DeepSeek Harness: auto-archive, folder organization, LLM knowledge library, bookmarks & notes, session delete. | `@dsh-external/dsh-archive-viewer` | MIT | 0 |
@@ -439,6 +448,7 @@ The directory currently contains 408 plugins that passed the basic bundle manife
 | [Yan-Zero/dsh-codex](https://github.com/Yan-Zero/dsh-codex) | Use your ChatGPT subscription in DeepSeek Harness through OpenAI's Codex sign-in flow | `dsh-codex` | Apache-2.0 | 0 |
 | [YELEBAI/dsh-plugin-marketplace](https://github.com/YELEBAI/dsh-plugin-marketplace) | Verified plugin marketplace and autonomous registry for DeepSeek Harness | `dsh-plugin-marketplace` | MIT | 0 |
 | [YJSoooooo/dsh-chrome](https://github.com/YJSoooooo/dsh-chrome) | Chrome profile bridge for DeepSeek Harness: control an existing signed-in Chrome profile through chrome_repl. | `dsh-chrome` | NOASSERTION | 0 |
+| [zimzaza4/dsh-bash-win](https://github.com/zimzaza4/dsh-bash-win) | 在 Windows 环境中为 DeepSeek Harness 提供 Git Bash 与 WSL2 bash 工具,含 bwrap 沙箱、审批模式、后台任务 | `@zimzaza4/dsh-bash-win` | MIT | 0 |
 | [ZK-Andy/dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve) | Continual self-evolution plugin for DeepSeek Harness: versioned, auditable, rollback-safe harness state refined from session trajectories, with a benchmark-driven validation loop. | `dsh-continual-evolve` | MIT | 0 |
 
 ## Find plugins

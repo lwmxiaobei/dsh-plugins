@@ -221,18 +221,26 @@ function generateChineseReadme(snapshot, plugins) {
     '',
     '访问地址：[dsh-plugins.org](https://dsh-plugins.org)',
     '',
-    '仓库同时提供部署在 Cloudflare Worker 上的插件集合网站，支持搜索、筛选、排序和复制固定版本安装命令。网站优先从 GitHub 主分支读取最新目录，读取失败时使用部署内目录。',
+    '仓库同时提供部署在 Cloudflare Worker 上的双语插件集合网站，支持搜索、筛选、排序、固定提交安装命令复制，以及每个插件的中文与英文静态详情页。网站包含规范链接、语言替代链接、Open Graph、Twitter Card、JSON-LD、XML Sitemap、robots.txt、RSS、Web App Manifest 与 llms.txt。',
     '',
-    '本地运行与部署说明：',
+    '本地运行：',
     '',
     '```bash',
     'npm install',
     'npm run dev',
+    '```',
+    '',
+    '质量检查与构建：',
+    '',
+    '```bash',
+    'npm run check',
     'npm test',
     'npm run build',
     'npx wrangler deploy --dry-run',
     'npm run deploy',
     '```',
+    '',
+    'SEO 入口：[中文目录](https://dsh-plugins.org/) · [英文目录](https://dsh-plugins.org/en) · [站点地图](https://dsh-plugins.org/sitemap.xml) · [RSS](https://dsh-plugins.org/feed.xml) · [AI 发现说明](https://dsh-plugins.org/llms.txt)',
     '',
     '## 插件目录',
     '',
@@ -301,18 +309,26 @@ function generateEnglishReadme(snapshot, plugins) {
     '',
     'Visit [dsh-plugins.org](https://dsh-plugins.org).',
     '',
-    'This repository also provides a plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, and copying installation commands pinned to exact commits. The website reads the latest catalog from the GitHub main branch and falls back to its bundled catalog when that request fails.',
+    'This repository also provides a bilingual plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, installation commands pinned to exact commits, and a static Chinese and English detail page for every plugin. The website includes canonical and alternate language links, Open Graph, Twitter Card, JSON-LD, an XML sitemap, robots.txt, RSS, a Web App Manifest, and llms.txt.',
     '',
-    'Run and deploy locally:',
+    'Run locally:',
     '',
     '```bash',
     'npm install',
     'npm run dev',
+    '```',
+    '',
+    'Check, build, and deploy:',
+    '',
+    '```bash',
+    'npm run check',
     'npm test',
     'npm run build',
     'npx wrangler deploy --dry-run',
     'npm run deploy',
     '```',
+    '',
+    'SEO entry points: [Chinese directory](https://dsh-plugins.org/) · [English directory](https://dsh-plugins.org/en) · [Sitemap](https://dsh-plugins.org/sitemap.xml) · [RSS](https://dsh-plugins.org/feed.xml) · [AI discovery guide](https://dsh-plugins.org/llms.txt)',
     '',
     '## Plugin directory',
     '',
@@ -364,6 +380,14 @@ function generateEnglishReadme(snapshot, plugins) {
     'This repository stores only navigation data, documentation, and maintenance scripts. It does not copy or embed third party plugin source code. Copyright and licensing remain with each upstream project. `NOASSERTION` means the GitHub API did not identify an explicit license.',
   )
   return `${lines.join('\n')}\n`
+}
+
+if (process.argv.includes('--readme-only')) {
+  const catalog = JSON.parse(await readFile(join(root, 'catalog', 'plugins.json'), 'utf8'))
+  await writeFile(join(root, 'README.md'), generateChineseReadme(catalog.generatedAt, catalog.plugins))
+  await writeFile(join(root, 'README.en.md'), generateEnglishReadme(catalog.generatedAt, catalog.plugins))
+  console.log(`README 生成完成：${catalog.plugins.length} 个插件。`)
+  process.exit(0)
 }
 
 const repositories = await searchRepositories()

@@ -1,5 +1,6 @@
 .DS_Store
 .playwright-cli/
+output/
 dist/
 node_modules/
 .wrangler/

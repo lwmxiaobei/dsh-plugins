@@ -1,7 +1,41 @@
 import { createSearchIndex, searchPlugins, uniqueFacetValues } from './search.js'
 
 const PAGE_SIZE = 24
-const DEFAULT_DESCRIPTION = '上游仓库暂未提供介绍'
+const locale = document.body.dataset.locale === 'en' ? 'en' : 'zh'
+const detailRepositories = new Set(
+  JSON.parse(document.querySelector('#detail-repositories')?.textContent || '[]'),
+)
+const messages = locale === 'zh'
+  ? {
+      all: '全部',
+      copied: '已复制',
+      copyCommand: '复制命令',
+      copyFailed: '复制失败',
+      copyFailedStatus: '无法自动复制，请手动选择安装命令',
+      defaultDescription: '上游仓库暂未提供介绍',
+      found: (count) => `找到 ${count} 个匹配插件`,
+      licenseUnknown: '许可证未识别',
+      loadFailed: '插件目录加载失败，请稍后刷新重试。',
+      more: (count) => `再显示 ${count} 个`,
+      total: (count) => `共 ${count} 个插件`,
+      copyAria: (repository) => `复制命令：${repository}`,
+      copyStatus: (repository) => `${repository} 的安装命令已复制`,
+    }
+  : {
+      all: 'All ',
+      copied: 'Copied',
+      copyCommand: 'Copy command',
+      copyFailed: 'Copy failed',
+      copyFailedStatus: 'Automatic copy failed. Select the command manually.',
+      defaultDescription: 'The upstream repository has not provided a description yet.',
+      found: (count) => `${count} matching plugins`,
+      licenseUnknown: 'License unknown',
+      loadFailed: 'The plugin directory could not be loaded. Refresh and try again.',
+      more: (count) => `Show ${count} more`,
+      total: (count) => `${count} plugins`,
+      copyAria: (repository) => `Copy command for ${repository}`,
+      copyStatus: (repository) => `Install command for ${repository} copied`,
+    }
 
 const elements = {
   catalogUpdated: document.querySelector('#catalog-updated'),
@@ -28,11 +62,11 @@ const state = {
 }
 
 function formatNumber(value) {
-  return new Intl.NumberFormat('zh-CN').format(value)
+  return new Intl.NumberFormat(locale === 'zh' ? 'zh-CN' : 'en-US').format(value)
 }
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat('zh-CN', {
+  return new Intl.DateTimeFormat(locale === 'zh' ? 'zh-CN' : 'en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -45,12 +79,12 @@ function buildSelectOptions(select, values, label) {
   for (const value of values) {
     const option = document.createElement('option')
     option.value = value
-    option.textContent = value === 'NOASSERTION' ? '许可证未识别' : value
+    option.textContent = value === 'NOASSERTION' ? messages.licenseUnknown : value
     fragment.append(option)
   }
 
   select.append(fragment)
-  select.options[0].textContent = `全部${label}`
+  select.options[0].textContent = locale === 'zh' ? `${messages.all}${label}` : `${messages.all}${label}`
 }
 
 function getFilters() {
@@ -115,11 +149,17 @@ function createPluginCard(plugin, index) {
 
   fragment.querySelector('[data-owner]').textContent = owner
   repositoryLink.textContent = repositoryName
-  repositoryLink.href = plugin.url
+  if (detailRepositories.has(plugin.repository.toLowerCase())) {
+    repositoryLink.href = `${locale === 'en' ? '/en' : ''}/plugins/${encodeURIComponent(owner.toLowerCase())}/${encodeURIComponent(repositoryName.toLowerCase())}`
+  } else {
+    repositoryLink.href = plugin.url
+    repositoryLink.target = '_blank'
+    repositoryLink.rel = 'noopener noreferrer'
+  }
   fragment.querySelector('[data-stars]').textContent = formatNumber(plugin.stars)
-  fragment.querySelector('[data-description]').textContent = plugin.description || DEFAULT_DESCRIPTION
+  fragment.querySelector('[data-description]').textContent = plugin.description || messages.defaultDescription
   fragment.querySelector('[data-license]').textContent = plugin.license === 'NOASSERTION'
-    ? '许可证未识别'
+    ? messages.licenseUnknown
     : plugin.license
   fragment.querySelector('[data-command]').textContent = plugin.install.command
 
@@ -131,8 +171,9 @@ function createPluginCard(plugin, index) {
 
   copyButton.dataset.command = plugin.install.command
   copyButton.dataset.repository = plugin.repository
-  copyButton.setAttribute('aria-label', `复制 ${plugin.repository} 的安装命令`)
-  listItem.style.setProperty('--card-index', Math.min(index, 10))
+  copyButton.querySelector('span').textContent = messages.copyCommand
+  copyButton.setAttribute('aria-label', messages.copyAria(plugin.repository))
+  listItem.dataset.cardIndex = String(Math.min(index, 10))
 
   return fragment
 }
@@ -146,11 +187,11 @@ function renderResults() {
   elements.results.replaceChildren(fragment)
   elements.results.setAttribute('aria-busy', 'false')
   elements.resultSummary.textContent = hasActiveFilters()
-    ? `找到 ${formatNumber(state.matchedPlugins.length)} 个匹配插件`
-    : `共 ${formatNumber(state.matchedPlugins.length)} 个插件`
+    ? messages.found(formatNumber(state.matchedPlugins.length))
+    : messages.total(formatNumber(state.matchedPlugins.length))
   elements.emptyState.hidden = state.matchedPlugins.length !== 0
   elements.loadMore.hidden = state.visibleCount >= state.matchedPlugins.length
-  elements.loadMore.textContent = `再显示 ${Math.min(PAGE_SIZE, state.matchedPlugins.length - state.visibleCount)} 个`
+  elements.loadMore.textContent = messages.more(Math.min(PAGE_SIZE, state.matchedPlugins.length - state.visibleCount))
   elements.resetFilters.hidden = !hasActiveFilters()
 }
 
@@ -194,13 +235,13 @@ async function handleCopy(button) {
 
   try {
     await copyText(button.dataset.command)
-    label.textContent = '已复制'
+    label.textContent = messages.copied
     button.dataset.state = 'success'
-    elements.copyStatus.textContent = `${button.dataset.repository} 的安装命令已复制`
+    elements.copyStatus.textContent = messages.copyStatus(button.dataset.repository)
   } catch {
-    label.textContent = '复制失败'
+    label.textContent = messages.copyFailed
     button.dataset.state = 'error'
-    elements.copyStatus.textContent = '无法自动复制，请手动选择安装命令'
+    elements.copyStatus.textContent = messages.copyFailedStatus
   }
 
   window.setTimeout(() => {
@@ -249,14 +290,14 @@ async function loadCatalog() {
     state.index = createSearchIndex(state.catalog.plugins)
     elements.pluginTotal.textContent = formatNumber(state.catalog.count)
     elements.catalogUpdated.textContent = formatDate(state.catalog.generatedAt)
-    buildSelectOptions(elements.languageFilter, uniqueFacetValues(state.catalog.plugins, 'language'), '语言')
-    buildSelectOptions(elements.licenseFilter, uniqueFacetValues(state.catalog.plugins, 'license'), '许可证')
+    buildSelectOptions(elements.languageFilter, uniqueFacetValues(state.catalog.plugins, 'language'), locale === 'zh' ? '语言' : 'languages')
+    buildSelectOptions(elements.licenseFilter, uniqueFacetValues(state.catalog.plugins, 'license'), locale === 'zh' ? '许可证' : 'licenses')
     readUrlState()
     updateResults()
   } catch (error) {
     console.error(error)
     elements.results.setAttribute('aria-busy', 'false')
-    elements.resultSummary.textContent = '插件目录加载失败，请稍后刷新重试。'
+    elements.resultSummary.textContent = messages.loadFailed
   }
 }
 

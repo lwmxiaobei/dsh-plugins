@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "topic": "dsh-plugin",
-  "generatedAt": "2026-08-14T00:32:29.938Z",
-  "count": 408,
+  "generatedAt": "2026-08-14T00:40:24.876Z",
+  "count": 410,
   "plugins": [
     {
       "repository": "liustack/modlens",
@@ -11,13 +11,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "MIT",
-      "stars": 718,
+      "stars": 719,
       "forks": 22,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:21:28Z",
+      "updatedAt": "2026-08-14T00:37:20Z",
       "pushedAt": "2026-08-13T19:34:36Z",
       "classification": "plugin",
       "reason": null,
@@ -41,13 +41,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "BSD-3-Clause",
-      "stars": 222,
+      "stars": 224,
       "forks": 6,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:28:59Z",
+      "updatedAt": "2026-08-14T00:37:53Z",
       "pushedAt": "2026-08-13T23:46:03Z",
       "classification": "plugin",
       "reason": null,
@@ -71,13 +71,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "MIT",
-      "stars": 162,
+      "stars": 163,
       "forks": 4,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:17:49Z",
+      "updatedAt": "2026-08-14T00:37:17Z",
       "pushedAt": "2026-08-13T18:33:48Z",
       "classification": "plugin",
       "reason": null,
@@ -101,13 +101,13 @@
       "defaultBranch": "main",
       "language": "TypeScript",
       "license": "MIT",
-      "stars": 134,
+      "stars": 137,
       "forks": 3,
       "archived": false,
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:29:24Z",
+      "updatedAt": "2026-08-14T00:37:28Z",
       "pushedAt": "2026-08-13T17:05:21Z",
       "classification": "plugin",
       "reason": null,
@@ -335,6 +335,36 @@
       }
     },
     {
+      "repository": "omdsh-dev/dsh-at-file",
+      "url": "https://github.com/omdsh-dev/dsh-at-file",
+      "description": "Codex-style @file mentions for DeepSeek Harness: search workspace files in the composer and attach their contents to prompts.",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "stars": 28,
+      "forks": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "template": false,
+      "updatedAt": "2026-08-14T00:36:57Z",
+      "pushedAt": "2026-08-13T14:12:44Z",
+      "classification": "plugin",
+      "reason": null,
+      "commit": "3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86",
+      "package": {
+        "name": "dsh-at-file",
+        "version": "0.1.0",
+        "private": false,
+        "bundlePatch": "cordis.patch.yml",
+        "clientPlatform": "web"
+      },
+      "install": {
+        "spec": "github:omdsh-dev/dsh-at-file#3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86",
+        "command": "dsh plugin --profile web add github:omdsh-dev/dsh-at-file#3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86"
+      }
+    },
+    {
       "repository": "vlln/whale-girl",
       "url": "https://github.com/vlln/whale-girl",
       "description": "DSH Web GUI 桌面宠物插件（QQ 宠物形态）：右下角悬浮、可拖拽/投喂/玩耍的积累型伙伴。官方 repository-plugin（.dsh-plugin 格式），config.yaml 安装：github:dsh-external/whale-girl#<ref>&path:/.dsh-plugin",
@@ -362,36 +392,6 @@
       "install": {
         "spec": "github:vlln/whale-girl#ecba322be408138fcc265588cacf00737154d31e",
         "command": "dsh plugin --profile web add github:vlln/whale-girl#ecba322be408138fcc265588cacf00737154d31e"
-      }
-    },
-    {
-      "repository": "omdsh-dev/dsh-at-file",
-      "url": "https://github.com/omdsh-dev/dsh-at-file",
-      "description": "Codex-style @file mentions for DeepSeek Harness: search workspace files in the composer and attach their contents to prompts.",
-      "defaultBranch": "main",
-      "language": "JavaScript",
-      "license": "MIT",
-      "stars": 27,
-      "forks": 0,
-      "archived": false,
-      "disabled": false,
-      "fork": false,
-      "template": false,
-      "updatedAt": "2026-08-14T00:23:44Z",
-      "pushedAt": "2026-08-13T14:12:44Z",
-      "classification": "plugin",
-      "reason": null,
-      "commit": "3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86",
-      "package": {
-        "name": "dsh-at-file",
-        "version": "0.1.0",
-        "private": false,
-        "bundlePatch": "cordis.patch.yml",
-        "clientPlatform": "web"
-      },
-      "install": {
-        "spec": "github:omdsh-dev/dsh-at-file#3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86",
-        "command": "dsh plugin --profile web add github:omdsh-dev/dsh-at-file#3c8408e8df06ebbd7126d1d7ebcf897ec92a3b86"
       }
     },
     {
@@ -2687,11 +2687,11 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-13T21:13:28Z",
-      "pushedAt": "2026-08-13T16:38:33Z",
+      "updatedAt": "2026-08-14T00:34:34Z",
+      "pushedAt": "2026-08-14T00:34:31Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "78fcb431729e4d541aab468e6e88aeeda87eb94f",
+      "commit": "67fd06471108ce6655bbbf2e6c4853be52bab60a",
       "package": {
         "name": "dsh-search-mcp",
         "version": "0.1.0",
@@ -2700,8 +2700,8 @@
         "clientPlatform": "web"
       },
       "install": {
-        "spec": "github:gxpppp/dsh-search-mcp#78fcb431729e4d541aab468e6e88aeeda87eb94f",
-        "command": "dsh plugin --profile web add github:gxpppp/dsh-search-mcp#78fcb431729e4d541aab468e6e88aeeda87eb94f"
+        "spec": "github:gxpppp/dsh-search-mcp#67fd06471108ce6655bbbf2e6c4853be52bab60a",
+        "command": "dsh plugin --profile web add github:gxpppp/dsh-search-mcp#67fd06471108ce6655bbbf2e6c4853be52bab60a"
       }
     },
     {
@@ -5627,11 +5627,11 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:25:03Z",
-      "pushedAt": "2026-08-14T00:24:59Z",
+      "updatedAt": "2026-08-14T00:34:44Z",
+      "pushedAt": "2026-08-14T00:34:41Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "82c789226db2709de3e10f25a304dbc9baa1fc6e",
+      "commit": "78d5cd10fd39a1f8a171d51cc98051a955dc12a4",
       "package": {
         "name": "dsh-ssh-remote",
         "version": "0.1.0",
@@ -5640,8 +5640,8 @@
         "clientPlatform": "web"
       },
       "install": {
-        "spec": "github:CrazyShout/dsh-ssh-remote#82c789226db2709de3e10f25a304dbc9baa1fc6e",
-        "command": "dsh plugin --profile web add github:CrazyShout/dsh-ssh-remote#82c789226db2709de3e10f25a304dbc9baa1fc6e"
+        "spec": "github:CrazyShout/dsh-ssh-remote#78d5cd10fd39a1f8a171d51cc98051a955dc12a4",
+        "command": "dsh plugin --profile web add github:CrazyShout/dsh-ssh-remote#78d5cd10fd39a1f8a171d51cc98051a955dc12a4"
       }
     },
     {
@@ -9767,11 +9767,11 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:08:00Z",
-      "pushedAt": "2026-08-14T00:05:03Z",
+      "updatedAt": "2026-08-14T00:33:13Z",
+      "pushedAt": "2026-08-14T00:33:09Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "771ff33c5141240bcefb039dd06405c723218793",
+      "commit": "ffd1d8164a453f40c072e49c418632c0767ff113",
       "package": {
         "name": "dsh-recommend",
         "version": "0.2.0",
@@ -9780,8 +9780,8 @@
         "clientPlatform": "web"
       },
       "install": {
-        "spec": "github:zp-home/dsh-recommend#771ff33c5141240bcefb039dd06405c723218793",
-        "command": "dsh plugin --profile web add github:zp-home/dsh-recommend#771ff33c5141240bcefb039dd06405c723218793"
+        "spec": "github:zp-home/dsh-recommend#ffd1d8164a453f40c072e49c418632c0767ff113",
+        "command": "dsh plugin --profile web add github:zp-home/dsh-recommend#ffd1d8164a453f40c072e49c418632c0767ff113"
       }
     },
     {
@@ -10025,6 +10025,36 @@
       }
     },
     {
+      "repository": "BrambleXu/dsh-annotate",
+      "url": "https://github.com/BrambleXu/dsh-annotate",
+      "description": "Visual browser element annotation for DeepSeek Harness, capturing DOM, styles, accessibility data, comments, and viewport screenshots. DeepSeek Harness 浏览器元素标注插件，捕获 DOM、样式、可访问性数据、评论和视口截图。",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "stars": 0,
+      "forks": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "template": false,
+      "updatedAt": "2026-08-14T00:37:31Z",
+      "pushedAt": "2026-08-14T00:33:27Z",
+      "classification": "plugin",
+      "reason": null,
+      "commit": "a75c704bec7a3212c7f686c13c3bffc93af54ad7",
+      "package": {
+        "name": "dsh-annotate",
+        "version": "0.1.0",
+        "private": false,
+        "bundlePatch": "cordis.patch.yml",
+        "clientPlatform": null
+      },
+      "install": {
+        "spec": "github:BrambleXu/dsh-annotate#a75c704bec7a3212c7f686c13c3bffc93af54ad7",
+        "command": "dsh plugin --profile web add github:BrambleXu/dsh-annotate#a75c704bec7a3212c7f686c13c3bffc93af54ad7"
+      }
+    },
+    {
       "repository": "cakeni/harness-whale",
       "url": "https://github.com/cakeni/harness-whale",
       "description": "Unofficial community pet for DeepSeek Harness — a native DSH web plugin",
@@ -10037,11 +10067,11 @@
       "disabled": false,
       "fork": false,
       "template": false,
-      "updatedAt": "2026-08-14T00:30:16Z",
-      "pushedAt": "2026-08-14T00:30:11Z",
+      "updatedAt": "2026-08-14T00:33:24Z",
+      "pushedAt": "2026-08-14T00:33:21Z",
       "classification": "plugin",
       "reason": null,
-      "commit": "0edc45132f3e7e766faabee3a26737c59c84d959",
+      "commit": "0d6ced7745ba8afb2210dc5c64401c990ea4ca9c",
       "package": {
         "name": "harness-whale",
         "version": "0.1.0",
@@ -10050,8 +10080,8 @@
         "clientPlatform": "web"
       },
       "install": {
-        "spec": "github:cakeni/harness-whale#0edc45132f3e7e766faabee3a26737c59c84d959",
-        "command": "dsh plugin --profile web add github:cakeni/harness-whale#0edc45132f3e7e766faabee3a26737c59c84d959"
+        "spec": "github:cakeni/harness-whale#0d6ced7745ba8afb2210dc5c64401c990ea4ca9c",
+        "command": "dsh plugin --profile web add github:cakeni/harness-whale#0d6ced7745ba8afb2210dc5c64401c990ea4ca9c"
       }
     },
     {
@@ -12212,6 +12242,36 @@
       "install": {
         "spec": "github:YJSoooooo/dsh-chrome#89e02cf674044b590ef992cca8d3d61fbeaf5e35",
         "command": "dsh plugin --profile web add github:YJSoooooo/dsh-chrome#89e02cf674044b590ef992cca8d3d61fbeaf5e35"
+      }
+    },
+    {
+      "repository": "zimzaza4/dsh-bash-win",
+      "url": "https://github.com/zimzaza4/dsh-bash-win",
+      "description": "在 Windows 环境中为 DeepSeek Harness 提供 Git Bash 与 WSL2 bash 工具,含 bwrap 沙箱、审批模式、后台任务",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "stars": 0,
+      "forks": 0,
+      "archived": false,
+      "disabled": false,
+      "fork": false,
+      "template": false,
+      "updatedAt": "2026-08-14T00:34:02Z",
+      "pushedAt": "2026-08-14T00:30:31Z",
+      "classification": "plugin",
+      "reason": null,
+      "commit": "9253ad62288b80d64c7d223ca976623e1374b40d",
+      "package": {
+        "name": "@zimzaza4/dsh-bash-win",
+        "version": "0.1.0",
+        "private": false,
+        "bundlePatch": "cordis.patch.yml",
+        "clientPlatform": "web"
+      },
+      "install": {
+        "spec": "github:zimzaza4/dsh-bash-win#9253ad62288b80d64c7d223ca976623e1374b40d",
+        "command": "dsh plugin --profile web add github:zimzaza4/dsh-bash-win#9253ad62288b80d64c7d223ca976623e1374b40d"
       }
     },
     {
