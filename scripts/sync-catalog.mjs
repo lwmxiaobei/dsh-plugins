@@ -199,14 +199,40 @@ function sameData(left, right) {
   return JSON.stringify(left) === JSON.stringify(right)
 }
 
-function generateReadme(snapshot, plugins) {
+function appendPluginTable(lines, plugins, missingDescription) {
+  for (const plugin of plugins) {
+    const description = plugin.description || missingDescription
+    lines.push(`| [${markdownEscape(plugin.repository)}](${plugin.url}) | ${markdownEscape(description)} | \`${markdownEscape(plugin.package.name)}\` | ${markdownEscape(plugin.license)} | ${plugin.stars} |`)
+  }
+}
+
+function generateChineseReadme(snapshot, plugins) {
   const lines = [
     '# Awesome DSH Plugins',
+    '',
+    '[English](README.en.md) | 简体中文',
     '',
     '社区维护的 DeepSeek Harness 插件导航与介绍目录。',
     '',
     '> [!IMPORTANT]',
     '> 收录不代表官方背书、安全审计或运行兼容。安装第三方插件前，请检查上游源码、权限、依赖和许可证。',
+    '',
+    '## 插件网站',
+    '',
+    '访问地址：[dsh-plugins.org](https://dsh-plugins.org)',
+    '',
+    '仓库同时提供部署在 Cloudflare Worker 上的插件集合网站，支持搜索、筛选、排序和复制固定版本安装命令。网站优先从 GitHub 主分支读取最新目录，读取失败时使用部署内目录。',
+    '',
+    '本地运行与部署说明：',
+    '',
+    '```bash',
+    'npm install',
+    'npm run dev',
+    'npm test',
+    'npm run build',
+    'npx wrangler deploy --dry-run',
+    'npm run deploy',
+    '```',
     '',
     '## 插件目录',
     '',
@@ -217,10 +243,7 @@ function generateReadme(snapshot, plugins) {
     '| 插件 | 介绍 | 包名 | 许可证 | 星标 |',
     '| :--- | :--- | :--- | :---: | ---: |',
   ]
-  for (const plugin of plugins) {
-    const description = plugin.description || '上游仓库暂未提供介绍'
-    lines.push(`| [${markdownEscape(plugin.repository)}](${plugin.url}) | ${markdownEscape(description)} | \`${markdownEscape(plugin.package.name)}\` | ${markdownEscape(plugin.license)} | ${plugin.stars} |`)
-  }
+  appendPluginTable(lines, plugins, '上游仓库暂未提供介绍')
   lines.push(
     '',
     '## 查找插件',
@@ -263,6 +286,86 @@ function generateReadme(snapshot, plugins) {
   return `${lines.join('\n')}\n`
 }
 
+function generateEnglishReadme(snapshot, plugins) {
+  const lines = [
+    '# Awesome DSH Plugins',
+    '',
+    'English | [简体中文](README.md)',
+    '',
+    'A community maintained directory of DeepSeek Harness plugins, with links and descriptions.',
+    '',
+    '> [!IMPORTANT]',
+    '> Inclusion does not imply official endorsement, a security audit, or runtime compatibility. Review the upstream source code, permissions, dependencies, and license before installing a third party plugin.',
+    '',
+    '## Plugin website',
+    '',
+    'Visit [dsh-plugins.org](https://dsh-plugins.org).',
+    '',
+    'This repository also provides a plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, and copying installation commands pinned to exact commits. The website reads the latest catalog from the GitHub main branch and falls back to its bundled catalog when that request fails.',
+    '',
+    'Run and deploy locally:',
+    '',
+    '```bash',
+    'npm install',
+    'npm run dev',
+    'npm test',
+    'npm run build',
+    'npx wrangler deploy --dry-run',
+    'npm run deploy',
+    '```',
+    '',
+    '## Plugin directory',
+    '',
+    `Last updated: ${snapshot}`,
+    '',
+    `The directory currently contains ${plugins.length} plugins that passed the basic bundle manifest checks. Links and descriptions come from their upstream repositories, so descriptions may remain in the language used by each author.`,
+    '',
+    '| Plugin | Description | Package | License | Stars |',
+    '| :--- | :--- | :--- | :---: | ---: |',
+  ]
+  appendPluginTable(lines, plugins, 'No description provided by the upstream repository')
+  lines.push(
+    '',
+    '## Find plugins',
+    '',
+    '```bash',
+    'npm run list',
+    'node bin/dsh-plugins.mjs search vision',
+    'node bin/dsh-plugins.mjs info Anionex/dsh-vision-toolkit',
+    '```',
+    '',
+    '## Install a plugin',
+    '',
+    'The install command only prints a preview by default and does not execute upstream code:',
+    '',
+    '```bash',
+    'node bin/dsh-plugins.mjs install Anionex/dsh-vision-toolkit --profile web',
+    '```',
+    '',
+    'After reviewing the upstream code and license, add `--execute` to run the installation.',
+    '',
+    '## Inclusion rules',
+    '',
+    'The sync script discovers candidate repositories from the GitHub `dsh-plugin` topic. A project is listed only when its root `package.json` declares `dsh.bundle.patch`, the referenced patch file exists, and the repository is active, enabled, and not a template.',
+    '',
+    'See [catalog/plugins.json](catalog/plugins.json) for the machine readable plugin directory. See [catalog/repositories.json](catalog/repositories.json) for all candidates and exclusion reasons.',
+    '',
+    '## Automatic updates',
+    '',
+    'GitHub Actions discovers and validates plugins every day at 09:17 China Standard Time. When directory content changes, the workflow commits both README files and the catalog data to `main`. You can also run `sync plugins` manually from the Actions page.',
+    '',
+    '## Update locally',
+    '',
+    '```bash',
+    'npm run sync',
+    'npm run check',
+    '```',
+    '',
+    'This repository stores only navigation data, documentation, and maintenance scripts. It does not copy or embed third party plugin source code. Copyright and licensing remain with each upstream project. `NOASSERTION` means the GitHub API did not identify an explicit license.',
+  )
+  return `${lines.join('\n')}\n`
+}
+
 const repositories = await searchRepositories()
 console.log(`发现 ${repositories.length} 个带有 ${topic} 主题的仓库，开始校验清单。`)
 
@@ -299,7 +402,8 @@ await writeFile(pluginsPath, `${JSON.stringify({
   count: plugins.length,
   plugins,
 }, null, 2)}\n`)
-await writeFile(join(root, 'README.md'), generateReadme(snapshot, plugins))
+await writeFile(join(root, 'README.md'), generateChineseReadme(snapshot, plugins))
+await writeFile(join(root, 'README.en.md'), generateEnglishReadme(snapshot, plugins))
 
 const counts = Object.groupBy(inspected, (entry) => entry.classification)
 console.log(`同步完成：${plugins.length} 个插件，${counts.related?.length ?? 0} 个相关项目，${counts['invalid-plugin']?.length ?? 0} 个清单无效项目，${counts['excluded-plugin']?.length ?? 0} 个排除项目。`)

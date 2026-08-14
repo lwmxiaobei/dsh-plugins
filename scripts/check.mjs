@@ -19,6 +19,7 @@ function markdownEscape(value) {
 const catalog = JSON.parse(await readFile(join(root, 'catalog/plugins.json'), 'utf8'))
 const repositories = JSON.parse(await readFile(join(root, 'catalog/repositories.json'), 'utf8'))
 const readme = await readFile(join(root, 'README.md'), 'utf8')
+const englishReadme = await readFile(join(root, 'README.en.md'), 'utf8')
 
 if (catalog.schemaVersion !== 1) fail('plugins.json 的 schemaVersion 不受支持')
 if (repositories.schemaVersion !== 1) fail('repositories.json 的 schemaVersion 不受支持')
@@ -39,11 +40,21 @@ for (const plugin of catalog.plugins) {
   if (!readme.includes(`[${plugin.repository}](${plugin.url})`)) {
     fail(`README 缺少插件地址：${plugin.repository}`)
   }
+  if (!englishReadme.includes(`[${plugin.repository}](${plugin.url})`)) {
+    fail(`README.en.md 缺少插件地址：${plugin.repository}`)
+  }
   const description = markdownEscape(plugin.description || '上游仓库暂未提供介绍')
   if (!readme.includes(description)) {
     fail(`README 缺少插件介绍：${plugin.repository}`)
   }
+  const englishDescription = markdownEscape(plugin.description || 'No description provided by the upstream repository')
+  if (!englishReadme.includes(englishDescription)) {
+    fail(`README.en.md 缺少插件介绍：${plugin.repository}`)
+  }
 }
+
+if (!readme.includes('[English](README.en.md)')) fail('README 缺少英文版入口')
+if (!englishReadme.includes('[简体中文](README.md)')) fail('README.en.md 缺少中文版入口')
 
 const result = spawnSync('git', ['ls-files', '--stage', 'plugins'], { cwd: root, encoding: 'utf8' })
 if (result.status !== 0) {
