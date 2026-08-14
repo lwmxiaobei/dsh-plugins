@@ -34,8 +34,12 @@ for (const plugin of catalog.plugins) {
   if (plugin.classification !== 'plugin') fail(`插件分类错误：${plugin.repository}`)
   if (!/^[0-9a-f]{40}$/.test(plugin.commit)) fail(`提交哈希无效：${plugin.repository}`)
   if (!plugin.package?.bundlePatch) fail(`缺少 bundle patch：${plugin.repository}`)
-  if (plugin.install?.spec !== `github:${plugin.repository}#${plugin.commit}`) {
-    fail(`安装规格与固定提交不一致：${plugin.repository}`)
+  const expectedSpec = `github:${plugin.repository}`
+  if (plugin.install?.spec !== expectedSpec) {
+    fail(`安装规格未指向上游最新版本：${plugin.repository}`)
+  }
+  if (plugin.install?.command !== `dsh plugin --profile web add ${expectedSpec}`) {
+    fail(`安装命令未指向上游最新版本：${plugin.repository}`)
   }
   if (!readme.includes(`[${plugin.repository}](${plugin.url})`)) {
     fail(`README 缺少插件地址：${plugin.repository}`)

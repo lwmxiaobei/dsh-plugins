@@ -159,8 +159,8 @@ async function inspectRepository(repository) {
       clientPlatform: packageJson.dsh?.client?.platform ?? null,
     },
     install: {
-      spec: `github:${repository.full_name}#${commit}`,
-      command: `dsh plugin --profile web add github:${repository.full_name}#${commit}`,
+      spec: `github:${repository.full_name}`,
+      command: `dsh plugin --profile web add github:${repository.full_name}`,
     },
   }
 }
@@ -221,7 +221,7 @@ function generateChineseReadme(snapshot, plugins) {
     '',
     '访问地址：[dsh-plugins.org](https://dsh-plugins.org)',
     '',
-    '仓库同时提供部署在 Cloudflare Worker 上的双语插件集合网站，支持搜索、筛选、排序、固定提交安装命令复制，以及每个插件的中文与英文静态详情页。网站包含规范链接、语言替代链接、Open Graph、Twitter Card、JSON-LD、XML Sitemap、robots.txt、RSS、Web App Manifest 与 llms.txt。',
+    '仓库同时提供部署在 Cloudflare Worker 上的双语插件集合网站，支持搜索、筛选、排序、最新版本安装命令复制，以及每个插件的中文与英文静态详情页。网站包含规范链接、语言替代链接、Open Graph、Twitter Card、JSON-LD、XML Sitemap、robots.txt、RSS、Web App Manifest 与 llms.txt。',
     '',
     '本地运行：',
     '',
@@ -309,7 +309,7 @@ function generateEnglishReadme(snapshot, plugins) {
     '',
     'Visit [dsh-plugins.org](https://dsh-plugins.org).',
     '',
-    'This repository also provides a bilingual plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, installation commands pinned to exact commits, and a static Chinese and English detail page for every plugin. The website includes canonical and alternate language links, Open Graph, Twitter Card, JSON-LD, an XML sitemap, robots.txt, RSS, a Web App Manifest, and llms.txt.',
+    'This repository also provides a bilingual plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, install commands that follow the latest upstream default branch, and a static Chinese and English detail page for every plugin. The website includes canonical and alternate language links, Open Graph, Twitter Card, JSON-LD, an XML sitemap, robots.txt, RSS, a Web App Manifest, and llms.txt.',
     '',
     'Run locally:',
     '',

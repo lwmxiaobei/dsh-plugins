@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="收录 {{PLUGIN_COUNT}} 个 DeepSeek Harness 社区插件，支持按名称、功能、语言和许可证搜索，一键复制固定提交版本的 DSH 插件安装命令。">
+    <meta name="description" content="收录 {{PLUGIN_COUNT}} 个 DeepSeek Harness 社区插件，支持按名称、功能、语言和许可证搜索，一键复制跟随上游最新版本的 DSH 插件安装命令。">
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     <meta name="theme-color" content="#173c58">
     <meta name="color-scheme" content="light dark">
@@ -24,14 +24,14 @@
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:url" content="https://dsh-plugins.org/">
     <meta property="og:title" content="DeepSeek Harness 插件目录与安装指南">
-    <meta property="og:description" content="搜索 {{PLUGIN_COUNT}} 个 DSH 社区插件，查看详情并复制固定提交版本的安装命令。">
+    <meta property="og:description" content="搜索 {{PLUGIN_COUNT}} 个 DSH 社区插件，查看详情并复制最新版本安装命令。">
     <meta property="og:image" content="https://dsh-plugins.org/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="DSH Plugins，DeepSeek Harness 社区插件目录">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DeepSeek Harness 插件目录与安装指南">
-    <meta name="twitter:description" content="搜索 DSH 社区插件并复制固定版本安装命令。">
+    <meta name="twitter:description" content="搜索 DSH 社区插件并复制最新版本安装命令。">
     <meta name="twitter:image" content="https://dsh-plugins.org/og-image.png">
     <title>DeepSeek Harness 插件目录与安装指南 | DSH Plugins</title>
     {{STRUCTURED_DATA}}
@@ -63,7 +63,7 @@
         <div class="hero-copy">
           <p class="eyebrow"><span></span>DeepSeek Harness 社区目录</p>
           <h1>探索 <em>DSH 插件</em></h1>
-          <p class="hero-lead">发现、搜索和安装 DeepSeek Harness 社区插件。这里汇总真实上游仓库、版本、许可证和固定提交安装命令，让你更快找到适合智能体、Web UI 与开发工作流的扩展。</p>
+          <p class="hero-lead">发现、搜索和安装 DeepSeek Harness 社区插件。这里汇总真实上游仓库、版本、许可证和最新版本安装命令，让你更快找到适合智能体、Web UI 与开发工作流的扩展。</p>
           <a class="hero-action" href="#directory-title">
             <span>浏览插件目录</span>
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
@@ -100,7 +100,7 @@
         <div class="section-heading">
           <p class="section-index">01 / Plugin index</p>
           <h2 id="directory-title">DeepSeek Harness 插件目录</h2>
-          <p>从真实社区仓库中发现工具。可按关键词、语言和许可证筛选，每条安装命令都固定到目录校验时的提交版本。</p>
+          <p>从真实社区仓库中发现工具。可按关键词、语言和许可证筛选，每条安装命令都会在运行时获取上游默认分支的最新版本。</p>
         </div>
 
         <form class="search" id="search-form" role="search">
@@ -134,10 +134,10 @@
       </section>
 
       <section class="editorial-section" id="install-guide" aria-labelledby="guide-title">
-        <div class="section-heading compact-heading"><p class="section-index">02 / Install guide</p><h2 id="guide-title">如何安装 DSH 插件</h2><p>目录提供的是固定到具体 Git 提交的命令，便于复现安装结果。安装前仍应阅读上游说明并确认插件权限。</p></div>
+        <div class="section-heading compact-heading"><p class="section-index">02 / Install guide</p><h2 id="guide-title">如何安装 DSH 插件</h2><p>目录提供跟随上游默认分支的命令，运行时获取最新版本。安装前仍应阅读上游说明并确认插件权限。</p></div>
         <ol class="step-grid">
           <li><span>01</span><h3>查找插件</h3><p>使用名称、功能、包名或仓库作者搜索，也可以按开发语言和许可证缩小范围。</p></li>
-          <li><span>02</span><h3>检查详情</h3><p>打开插件详情页，核对仓库、版本、许可证、最近更新时间以及固定提交哈希。</p></li>
+          <li><span>02</span><h3>检查详情</h3><p>打开插件详情页，核对仓库、当前包版本、许可证、最近更新时间以及目录校验快照。</p></li>
           <li><span>03</span><h3>复制并运行</h3><p>点击复制安装命令，在 DeepSeek Harness 所在终端运行。安装后按照上游文档完成配置。</p></li>
         </ol>
       </section>
@@ -151,7 +151,7 @@
         <div class="section-heading compact-heading"><p class="section-index">04 / FAQ</p><h2 id="faq-title">常见问题</h2><p>关于搜索、安装命令和目录数据的说明。</p></div>
         <div class="faq-list">
           <details><summary>DeepSeek Harness 插件是什么？</summary><p>它是安装到 DeepSeek Harness 的扩展包，可以增加工具、界面、模型接入、记忆、浏览器自动化等能力。每个插件由对应上游仓库维护。</p></details>
-          <details><summary>为什么安装命令包含提交哈希？</summary><p>固定提交哈希可以避免上游分支变化导致同一命令得到不同代码，使目录记录与实际安装版本更容易核验和复现。</p></details>
+          <details><summary>安装命令会安装哪个版本？</summary><p>命令不包含提交哈希，DeepSeek Harness 会在安装时获取上游默认分支的最新版本。详情页中的提交信息仅用于标记目录校验快照。</p></details>
           <details><summary>目录中的插件都经过安全审计吗？</summary><p>没有。目录只校验公开元数据与基本插件结构，不代表对代码、安全性或隐私实践的完整审计。安装前请自行查看源码、权限和许可证。</p></details>
           <details><summary>如何提交或更新插件？</summary><p>为公开 GitHub 仓库添加 <code>dsh-plugin</code> 主题并确保插件清单完整。目录同步后会重新发现和校验，也可前往项目仓库提交问题。</p></details>
         </div>

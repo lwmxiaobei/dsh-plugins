@@ -75,6 +75,8 @@ test('每个插件都有唯一的双语静态详情页', async () => {
         canonical: `https://dsh-plugins.org${path}`,
       })
       assert.match(html, new RegExp(plugin.commit))
+      assert.ok(html.includes(plugin.install.command))
+      assert.doesNotMatch(plugin.install.command, /#[0-9a-f]{40}$/)
       assert.match(html, /<script type="module" src="\/copy\.js"><\/script>/)
       const schemas = matches(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g).map(JSON.parse)
       assert.deepEqual(schemas.map((item) => item['@type']), ['SoftwareSourceCode', 'BreadcrumbList'])

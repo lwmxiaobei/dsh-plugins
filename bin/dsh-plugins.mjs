@@ -61,7 +61,7 @@ function printInfo(plugin) {
 描述：${plugin.description ?? '无'}
 许可证：${plugin.license}
 语言：${plugin.language ?? '未知'}
-固定提交：${plugin.commit}
+目录校验提交：${plugin.commit}
 上游地址：${plugin.url}
 安装规格：${plugin.install.spec}`)
 }
@@ -102,7 +102,7 @@ if (command === 'list') {
 
   const plugin = findPlugin(query)
   const commandArgs = ['plugin', '--profile', profile, 'add', plugin.install.spec]
-  console.log(`将安装固定版本：${plugin.repository}@${plugin.commit.slice(0, 12)}`)
+  console.log(`将从上游 ${plugin.defaultBranch} 分支安装最新版本：${plugin.repository}`)
   console.log(`命令：dsh ${commandArgs.join(' ')}`)
 
   if (!args.includes('--execute')) {

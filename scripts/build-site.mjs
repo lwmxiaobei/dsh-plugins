@@ -169,13 +169,13 @@ function homeSchema(locale) {
   const questions = isZh
     ? [
         ['DeepSeek Harness 插件是什么？', '它是安装到 DeepSeek Harness 的扩展包，可以增加工具、界面、模型接入、记忆、浏览器自动化等能力。'],
-        ['为什么安装命令包含提交哈希？', '固定提交哈希可以避免上游分支变化导致同一命令得到不同代码，使安装结果更容易核验和复现。'],
+        ['安装命令会安装哪个版本？', '安装命令不包含提交哈希，DeepSeek Harness 会在安装时获取上游默认分支的最新版本。目录中的提交信息只用于标记校验快照。'],
         ['目录中的插件都经过安全审计吗？', '没有。目录校验公开元数据与基本插件结构，安装前仍需自行查看源码、权限和许可证。'],
         ['如何提交或更新插件？', '为公开 GitHub 仓库添加 dsh-plugin 主题并确保插件清单完整，目录同步时会重新发现和校验。'],
       ]
     : [
         ['What is a DeepSeek Harness plugin?', 'It is an extension installed into DeepSeek Harness to add tools, interfaces, model integrations, memory, browser automation, or other capabilities.'],
-        ['Why does the install command include a commit hash?', 'A pinned commit prevents a moving branch from returning different code for the same command and makes installs easier to verify and reproduce.'],
+        ['Which version does the install command use?', 'The command has no commit hash. DeepSeek Harness fetches the latest version from the upstream default branch when you install it. The catalog commit only identifies the checked snapshot.'],
         ['Are listed plugins security audited?', 'No. The directory checks public metadata and basic plugin structure. Review source, permissions, and license before installing.'],
         ['How do I submit or update a plugin?', 'Add the dsh-plugin topic to a public GitHub repository and keep its plugin manifest complete so the directory can discover and validate it.'],
       ]
@@ -227,8 +227,8 @@ function homeSchema(locale) {
 
 function pluginDescription(plugin, locale) {
   const fallback = locale === 'zh'
-    ? `${plugin.repository} 是一个 DeepSeek Harness 社区插件。目录已校验其公开插件元数据并提供固定提交版本的安装命令，上游暂未提供详细功能介绍。`
-    : `${plugin.repository} is a community plugin for DeepSeek Harness. The directory has checked its public plugin metadata and provides a commit-pinned install command; no detailed upstream description is available yet.`
+    ? `${plugin.repository} 是一个 DeepSeek Harness 社区插件。目录已校验其公开插件元数据，并提供跟随上游默认分支最新版本的安装命令。上游暂未提供详细功能介绍。`
+    : `${plugin.repository} is a community plugin for DeepSeek Harness. The directory has checked its public plugin metadata and provides an install command that follows the latest upstream default branch. No detailed upstream description is available yet.`
   return cleanText(plugin.description) || fallback
 }
 
@@ -249,8 +249,8 @@ function renderPluginPage(plugin, locale) {
     ? `${repository} · ${owner} 插件详情与安装 | DSH Plugins`
     : `${repository} plugin by ${owner} | DSH Plugins`, isZh ? 55 : 60)
   const metaDescription = truncate(isZh
-    ? `${plugin.repository} DeepSeek Harness 插件详情、版本、许可证与固定提交安装命令。${sourceDescription}`
-    : `${plugin.repository} plugin details, version, license, and commit-pinned command for DeepSeek Harness. ${sourceDescription}`, isZh ? 90 : 158)
+    ? `${plugin.repository} DeepSeek Harness 插件详情、版本、许可证与最新版本安装命令。${sourceDescription}`
+    : `${plugin.repository} plugin details, version, license, and latest-version install command for DeepSeek Harness. ${sourceDescription}`, isZh ? 90 : 158)
   const license = plugin.license === 'NOASSERTION' ? (isZh ? '未识别' : 'Unknown') : plugin.license
   const version = plugin.package?.version || (isZh ? '未提供' : 'Not provided')
   const language = plugin.language || (isZh ? '未提供' : 'Not provided')
@@ -296,7 +296,7 @@ function renderPluginPage(plugin, locale) {
       <article class="plugin-detail">
         <header class="detail-hero"><p class="eyebrow"><span></span>${isZh ? 'DeepSeek Harness 社区插件' : 'DeepSeek Harness community plugin'}</p><p class="detail-owner">${escapeHtml(owner)}</p><h1>${escapeHtml(repository)}</h1><p class="detail-lead">${escapeHtml(sourceDescription)}</p><div class="detail-actions"><a class="primary-link" href="${escapeHtml(plugin.url)}" target="_blank" rel="noopener noreferrer">${isZh ? '查看上游源码' : 'View upstream source'} <span aria-hidden="true">↗</span></a><a class="secondary-link" href="${current.home}">${isZh ? '返回目录' : 'Back to directory'}</a></div></header>
 
-        <section class="detail-section" aria-labelledby="install-title"><p class="section-index">01 / Install</p><h2 id="install-title">${isZh ? '安装命令' : 'Install command'}</h2><p>${isZh ? '下面的命令固定到本目录校验时的 Git 提交。复制后在运行 DeepSeek Harness 的终端执行。' : 'This command is pinned to the Git commit checked by the directory. Copy it and run it in the terminal where DeepSeek Harness is available.'}</p><div class="detail-command"><code>${escapeHtml(plugin.install.command)}</code><button class="copy-button" type="button" data-copy data-command="${escapeHtml(plugin.install.command)}" data-repository="${escapeHtml(plugin.repository)}" aria-label="${escapeHtml(copyLabel)}">${copyLabel}</button></div><p class="commit-note">${isZh ? '固定提交' : 'Pinned commit'} <code>${escapeHtml(commit)}</code></p></section>
+        <section class="detail-section" aria-labelledby="install-title"><p class="section-index">01 / Install</p><h2 id="install-title">${isZh ? '安装命令' : 'Install command'}</h2><p>${isZh ? '下面的命令不固定提交，运行时会获取上游默认分支的最新版本。复制后在运行 DeepSeek Harness 的终端执行。' : 'This command is not pinned to a commit. It fetches the latest version from the upstream default branch when run in a terminal with DeepSeek Harness.'}</p><div class="detail-command"><code>${escapeHtml(plugin.install.command)}</code><button class="copy-button" type="button" data-copy data-command="${escapeHtml(plugin.install.command)}" data-repository="${escapeHtml(plugin.repository)}" aria-label="${escapeHtml(copyLabel)}">${copyLabel}</button></div><p class="commit-note">${isZh ? '目录校验提交' : 'Catalog check commit'} <code>${escapeHtml(commit)}</code> ${isZh ? '仅用于标记当前目录快照' : 'identifies the current catalog snapshot only'}</p></section>
 
         <section class="detail-section" aria-labelledby="metadata-title"><p class="section-index">02 / Metadata</p><h2 id="metadata-title">${isZh ? '插件信息' : 'Plugin metadata'}</h2><dl class="metadata-grid"><div><dt>${isZh ? '包名' : 'Package'}</dt><dd>${escapeHtml(packageName)}</dd></div><div><dt>${isZh ? '版本' : 'Version'}</dt><dd>${escapeHtml(version)}</dd></div><div><dt>${isZh ? '开发语言' : 'Language'}</dt><dd>${escapeHtml(language)}</dd></div><div><dt>${isZh ? '许可证' : 'License'}</dt><dd>${escapeHtml(license)}</dd></div><div><dt>GitHub Stars</dt><dd>${plugin.stars.toLocaleString(isZh ? 'zh-CN' : 'en-US')}</dd></div><div><dt>${isZh ? '目录更新时间' : 'Catalog updated'}</dt><dd><time datetime="${escapeHtml(plugin.updatedAt)}">${escapeHtml(updated)}</time></dd></div></dl></section>
 
@@ -322,7 +322,7 @@ function contentPageData(kind, locale) {
           heading: '关于 DSH Plugins',
           eyebrow: 'About the directory',
           blocks: [
-            ['为社区插件提供清晰入口', 'DSH Plugins 是一个面向 DeepSeek Harness 用户与开发者的开放目录。它把分散在 GitHub 的社区插件整理为可搜索页面，展示上游仓库、包版本、许可证、更新时间和可复现的安装命令。'],
+            ['为社区插件提供清晰入口', 'DSH Plugins 是一个面向 DeepSeek Harness 用户与开发者的开放目录。它把分散在 GitHub 的社区插件整理为可搜索页面，展示上游仓库、包版本、许可证、更新时间和最新版本安装命令。'],
             ['数据从哪里来', '目录从带有 dsh-plugin 主题的公开 GitHub 仓库发现候选项目，再校验插件清单与包信息。数据定时同步，插件详情页会标明当前快照的更新时间。'],
             ['收录边界', '收录只说明仓库符合目录的公开元数据规则，不等于 DeepSeek 官方认可、安全审计或功能质量保证。用户安装前应独立检查源码、权限、配置、维护状态和许可证。'],
             ['修正与贡献', '如果插件缺失或信息有误，可以为公开仓库补充 dsh-plugin 主题和有效插件清单，也可以在目录的 GitHub 仓库提交问题或贡献修正。'],
@@ -334,7 +334,7 @@ function contentPageData(kind, locale) {
           heading: 'About DSH Plugins',
           eyebrow: 'About the directory',
           blocks: [
-            ['A clear entry point for community plugins', 'DSH Plugins is an open directory for DeepSeek Harness users and developers. It turns community repositories scattered across GitHub into searchable pages with upstream source, package version, license, update time, and reproducible install commands.'],
+            ['A clear entry point for community plugins', 'DSH Plugins is an open directory for DeepSeek Harness users and developers. It turns community repositories scattered across GitHub into searchable pages with upstream source, package version, license, update time, and install commands that follow the latest upstream default branch.'],
             ['Where the data comes from', 'The catalog discovers public GitHub repositories carrying the dsh-plugin topic, then checks their plugin manifest and package metadata. Data is refreshed regularly and each detail page states when its snapshot was updated.'],
             ['What inclusion means', 'A listing only means that a repository meets the public metadata rules of this directory. It is not approval by DeepSeek, a security audit, or a guarantee of quality. Review source, permissions, configuration, maintenance, and license before installing.'],
             ['Corrections and contributions', 'If a plugin is missing or inaccurate, add the dsh-plugin topic and a valid plugin manifest to its public repository, or open an issue and contribute a correction in the directory repository.'],
