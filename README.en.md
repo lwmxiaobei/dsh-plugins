@@ -9,28 +9,7 @@ A community maintained directory of DeepSeek Harness plugins, with links and des
 
 ## Plugin website
 
-Visit [dsh-plugins.org](https://dsh-plugins.org).
-
-This repository also provides a bilingual plugin directory website deployed on Cloudflare Workers. It supports search, filters, sorting, install commands that follow the latest upstream default branch, and a static Chinese and English detail page for every plugin. The website includes canonical and alternate language links, Open Graph, Twitter Card, JSON-LD, an XML sitemap, robots.txt, RSS, a Web App Manifest, and llms.txt.
-
-Run locally:
-
-```bash
-npm install
-npm run dev
-```
-
-Check, build, and deploy:
-
-```bash
-npm run check
-npm test
-npm run build
-npx wrangler deploy --dry-run
-npm run deploy
-```
-
-SEO entry points: [Chinese directory](https://dsh-plugins.org/) · [English directory](https://dsh-plugins.org/en) · [Sitemap](https://dsh-plugins.org/sitemap.xml) · [RSS](https://dsh-plugins.org/feed.xml) · [AI discovery guide](https://dsh-plugins.org/llms.txt)
+[dsh-plugins.org](https://dsh-plugins.org)
 
 ## Plugin directory
 

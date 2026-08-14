@@ -9,28 +9,7 @@
 
 ## 插件网站
 
-访问地址：[dsh-plugins.org](https://dsh-plugins.org)
-
-仓库同时提供部署在 Cloudflare Worker 上的双语插件集合网站，支持搜索、筛选、排序、最新版本安装命令复制，以及每个插件的中文与英文静态详情页。网站包含规范链接、语言替代链接、Open Graph、Twitter Card、JSON-LD、XML Sitemap、robots.txt、RSS、Web App Manifest 与 llms.txt。
-
-本地运行：
-
-```bash
-npm install
-npm run dev
-```
-
-质量检查与构建：
-
-```bash
-npm run check
-npm test
-npm run build
-npx wrangler deploy --dry-run
-npm run deploy
-```
-
-SEO 入口：[中文目录](https://dsh-plugins.org/) · [英文目录](https://dsh-plugins.org/en) · [站点地图](https://dsh-plugins.org/sitemap.xml) · [RSS](https://dsh-plugins.org/feed.xml) · [AI 发现说明](https://dsh-plugins.org/llms.txt)
+[dsh-plugins.org](https://dsh-plugins.org)
 
 ## 插件目录
 
